@@ -12,6 +12,250 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Dark mode styles */
+        .dark {
+            color-scheme: dark;
+        }
+        
+        .dark body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        /* Header specific background */
+        .header-bg {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .dark .header-bg {
+            background-color: rgba(15, 23, 42, 0.8) !important;
+        }
+        
+        /* Header text colors with high specificity */
+        header h1 {
+            color: #000000 !important;
+        }
+        
+        .dark header h1 {
+            color: #ffffff !important;
+        }
+        
+        /* Desktop header elements */
+        header #main-nav a,
+        header #auth-links a,
+        header #auth-links button,
+        header #user-menu a,
+        header #user-menu button,
+        header #user-menu span,
+        header #mobile-menu-button {
+            color: #111827 !important;
+        }
+        
+        .dark header #main-nav a,
+        .dark header #auth-links a,
+        .dark header #auth-links button,
+        .dark header #user-menu a,
+        .dark header #user-menu button,
+        .dark header #user-menu span,
+        .dark header #mobile-menu-button {
+            color: #d1d5db !important;
+        }
+        
+        /* Mobile menu elements - separate rules for better control */
+        #mobile-nav a,
+        #mobile-auth-links a,
+        #mobile-auth-links button,
+        #mobile-auth-links span,
+        #mobile-user-menu a,
+        #mobile-user-menu button,
+        #mobile-user-menu span {
+            color: #111827 !important;
+        }
+        
+        .dark #mobile-nav a,
+        .dark #mobile-auth-links a,
+        .dark #mobile-auth-links button,
+        .dark #mobile-auth-links span,
+        .dark #mobile-user-menu a,
+        .dark #mobile-user-menu button,
+        .dark #mobile-user-menu span {
+            color: #d1d5db !important;
+        }
+        
+        /* Hover states */
+        header #main-nav a:hover,
+        header #auth-links a:hover,
+        header #auth-links button:hover,
+        header #user-menu a:hover,
+        header #user-menu button:hover,
+        header #mobile-menu-button:hover {
+            color: #2563eb !important;
+        }
+        
+        .dark header #main-nav a:hover,
+        .dark header #auth-links a:hover,
+        .dark header #auth-links button:hover,
+        .dark header #user-menu a:hover,
+        .dark header #user-menu button:hover,
+        .dark header #mobile-menu-button:hover {
+            color: #60a5fa !important;
+        }
+        
+        /* Mobile menu hover states */
+        #mobile-nav a:hover,
+        #mobile-auth-links a:hover,
+        #mobile-auth-links button:hover,
+        #mobile-user-menu a:hover,
+        #mobile-user-menu button:hover {
+            color: #2563eb !important;
+        }
+        
+        .dark #mobile-nav a:hover,
+        .dark #mobile-auth-links a:hover,
+        .dark #mobile-auth-links button:hover,
+        .dark #mobile-user-menu a:hover,
+        .dark #mobile-user-menu button:hover {
+            color: #60a5fa !important;
+        }
+        
+        .dark .bg-white {
+            background-color: #1e293b !important;
+        }
+        
+        /* Mobile menu specific background override */
+        #mobile-menu {
+            background-color: #ffffff !important;
+        }
+        
+        .dark #mobile-menu {
+            background-color: #111827 !important;
+        }
+        
+        /* Header border override */
+        header {
+            border-bottom-color: #e4e4e4 !important;
+        }
+        
+        .dark header {
+            border-bottom-color: #374151 !important;
+        }
+        
+        .dark .bg-gray-50 {
+            background-color: #0f172a !important;
+        }
+        
+        .dark .bg-gray-100 {
+            background-color: #334155 !important;
+        }
+        
+        .dark .bg-gray-200 {
+            background-color: #475569 !important;
+        }
+        
+        .dark .text-gray-900 {
+            color: #e2e8f0 !important;
+        }
+        
+        .dark .text-gray-700 {
+            color: #cbd5e1 !important;
+        }
+        
+        .dark .text-gray-600 {
+            color: #94a3b8 !important;
+        }
+        
+        .dark .text-gray-500 {
+            color: #64748b !important;
+        }
+        
+        .dark .border-gray-200 {
+            border-color: #374151 !important;
+        }
+        
+        .dark .border-gray-300 {
+            border-color: #4b5563 !important;
+        }
+        
+        .dark .shadow-sm {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3) !important;
+        }
+        
+        .dark .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2) !important;
+        }
+        
+        .dark .shadow-xl {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;
+        }
+        
+        .dark .shadow-2xl {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4) !important;
+        }
+        
+        .dark .bg-blue-50 {
+            background-color: #1e3a8a !important;
+        }
+        
+        .dark .bg-blue-100 {
+            background-color: #1d4ed8 !important;
+        }
+        
+        .dark .bg-green-50 {
+            background-color: #14532d !important;
+        }
+        
+        .dark .bg-green-100 {
+            background-color: #166534 !important;
+        }
+        
+        .dark .bg-yellow-100 {
+            background-color: #92400e !important;
+        }
+        
+        .dark .text-green-600 {
+            color: #22c55e !important;
+        }
+        
+        .dark .text-green-700 {
+            color: #16a34a !important;
+        }
+        
+        .dark .text-green-800 {
+            color: #15803d !important;
+        }
+        
+        .dark .text-yellow-700 {
+            color: #eab308 !important;
+        }
+        
+        .dark .text-blue-600 {
+            color: #3b82f6 !important;
+        }
+        
+        .dark .text-blue-700 {
+            color: #2563eb !important;
+        }
+        
+        .dark .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+        }
+        
+        .dark input, .dark select, .dark textarea {
+            background-color: #374151 !important;
+            border-color: #4b5563 !important;
+            color: #f9fafb !important;
+        }
+        
+        .dark input:focus, .dark select:focus, .dark textarea:focus {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+        }
+        
+        .dark input::placeholder {
+            color: #9ca3af !important;
         }
         .hero-gradient {
             background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
@@ -48,6 +292,20 @@
         }
         .faq-chevron.rotated {
             transform: rotate(180deg);
+        }
+        
+        /* Dark mode toggle animation */
+        .dark-mode-icon-light,
+        .dark-mode-icon-dark {
+            transition: opacity 0.3s ease;
+        }
+        
+        .dark .dark-mode-icon-light {
+            display: none;
+        }
+        
+        .dark .dark-mode-icon-dark {
+            display: inline-block !important;
         }
         input[type=range] {
             -webkit-appearance: none;
@@ -88,30 +346,88 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-50 text-gray-900">
 
     <!-- Header -->
-    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-gray-200">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-             <a href="#" class="flex items-center space-x-2" onclick="event.preventDefault(); window.location.hash = '';">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                <h1 class="text-xl font-bold text-gray-900">Cover Insurance</h1>
-            </a>
-            <div class="hidden md:flex items-center space-x-6">
-                <a href="#plans" class="text-gray-600 hover:text-blue-600">For Individuals</a>
-                <a href="#signup?type=b2b" class="text-gray-600 hover:text-blue-600">For Businesses</a>
-                <a href="#faq" class="text-gray-600 hover:text-blue-600">FAQs</a>
-            </div>
-            <div id="auth-links" class="flex items-center space-x-4">
-                 <a href="#login" class="text-gray-600 hover:text-blue-600 font-medium">Log In</a>
-                 <a href="#signup?type=b2c" class="cta-button bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700">
-                    Sign Up
+    <header class="header-bg backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-gray-100 dark:border-gray-700">
+        <div class="container mx-auto px-6 py-4">
+            <!-- Desktop Header -->
+            <div class="hidden md:flex justify-between items-center">
+                <a href="#" class="flex items-center space-x-2" onclick="event.preventDefault(); window.location.hash = '';">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <h1 class="text-xl font-bold text-black dark:text-white">Cover Insurance</h1>
                 </a>
+                <div id="main-nav" class="flex items-center space-x-6">
+                    <a href="#plans" class="text-gray-900 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">For Individuals</a>
+                    <a href="#business" class="text-gray-900 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">For Businesses</a>
+                    <a href="#faq" class="text-gray-900 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">FAQs</a>
+                </div>
+                <div id="auth-links" class="flex items-center space-x-4">
+                    <button id="dark-mode-toggle" class="p-2 rounded-lg text-gray-900 hover:text-blue-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700 transition-colors" title="Toggle dark mode">
+                        <i data-lucide="sun" class="w-5 h-5 dark-mode-icon-light"></i>
+                        <i data-lucide="moon" class="w-5 h-5 dark-mode-icon-dark hidden"></i>
+                    </button>
+                    <a href="#login" class="text-gray-900 hover:text-blue-600 font-medium dark:text-gray-300 dark:hover:text-blue-400">Log In</a>
+                    <a href="#signup?type=b2c" class="cta-button bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">
+                        Sign Up
+                    </a>
+                </div>
+                <div id="user-menu" class="hidden items-center space-x-4">
+                    <button id="dark-mode-toggle-logged-in" class="p-2 rounded-lg text-gray-900 hover:text-blue-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700 transition-colors" title="Toggle dark mode">
+                        <i data-lucide="sun" class="w-5 h-5 dark-mode-icon-light"></i>
+                        <i data-lucide="moon" class="w-5 h-5 dark-mode-icon-dark hidden"></i>
+                    </button>
+                    <span id="user-greeting" class="font-medium text-gray-900 dark:text-gray-300"></span>
+                    <a href="#dashboard" class="font-semibold text-gray-900 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">My Dashboard</a>
+                    <button id="logoutButton" class="text-gray-900 hover:text-blue-600 font-medium dark:text-gray-300 dark:hover:text-blue-400">Log Out</button>
+                </div>
             </div>
-            <div id="user-menu" class="hidden items-center space-x-4">
-                <span id="user-greeting" class="font-medium text-gray-700"></span>
-                <a href="#dashboard" class="font-semibold text-gray-600 hover:text-blue-600">My Dashboard</a>
-                <button id="logoutButton" class="text-gray-600 hover:text-blue-600 font-medium">Log Out</button>
+            
+            <!-- Mobile Header -->
+            <div class="md:hidden flex justify-between items-center">
+                <a href="#" class="flex items-center space-x-2" onclick="event.preventDefault(); window.location.hash = '';">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <h1 class="text-xl font-bold text-black dark:text-white">Cover Insurance</h1>
+                </a>
+                <button id="mobile-menu-button" class="text-gray-900 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 p-2">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg border-t border-gray-200 dark:border-gray-700 z-40">
+                <div class="container mx-auto px-6 py-4">
+                    <div id="mobile-nav" class="space-y-4 mb-4">
+                        <a href="#plans" class="block text-gray-900 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 py-2">For Individuals</a>
+                        <a href="#business" class="block text-gray-900 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 py-2">For Businesses</a>
+                        <a href="#faq" class="block text-gray-900 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 py-2">FAQs</a>
+                    </div>
+                    <div id="mobile-auth-links" class="flex flex-col space-y-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Theme</span>
+                            <button id="mobile-dark-mode-toggle" class="p-2 rounded-lg text-gray-900 hover:text-blue-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700 transition-colors" title="Toggle dark mode">
+                                <i data-lucide="sun" class="w-5 h-5 dark-mode-icon-light"></i>
+                                <i data-lucide="moon" class="w-5 h-5 dark-mode-icon-dark hidden"></i>
+                            </button>
+                        </div>
+                        <a href="#login" class="block text-center text-gray-900 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium py-2">Log In</a>
+                        <a href="#signup?type=b2c" class="block text-center cta-button bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">
+                            Sign Up
+                        </a>
+                    </div>
+                    <div id="mobile-user-menu" class="hidden flex-col space-y-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Theme</span>
+                            <button id="mobile-dark-mode-toggle-logged-in" class="p-2 rounded-lg text-gray-900 hover:text-blue-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700 transition-colors" title="Toggle dark mode">
+                                <i data-lucide="sun" class="w-5 h-5 dark-mode-icon-light"></i>
+                                <i data-lucide="moon" class="w-5 h-5 dark-mode-icon-dark hidden"></i>
+                            </button>
+                        </div>
+                        <span id="mobile-user-greeting" class="font-medium text-gray-900 dark:text-gray-300 text-center py-2"></span>
+                        <a href="#dashboard" class="block text-center font-semibold text-gray-900 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 py-2">My Dashboard</a>
+                        <button id="mobile-logoutButton" class="block w-full text-center text-gray-900 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium py-2">Log Out</button>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -199,7 +515,7 @@
                                     <span class="text-5xl font-bold text-gray-900" id="premiumResult">₹750</span>
                                     <span class="text-gray-600">/ month</span>
                                 </div>
-                                <a href="#plans" onclick="generateAndShowPlans(event)" class="cta-button mt-6 w-full block bg-blue-600 text-white font-bold py-3 rounded-lg text-lg hover:bg-blue-700">
+                                <a href="#plans" onclick="generateAndShowPlans(event)" class="cta-button mt-6 w-full block bg-blue-600 text-white font-bold py-3 rounded-lg text-lg hover:bg-blue-700" id="view-plans-btn">
                                     View Plans
                                 </a>
                             </div>
@@ -223,6 +539,71 @@
                             <h4 class="text-xl font-semibold text-blue-600">Milestone 2: Diversification</h4>
                             <p class="mt-2 text-gray-600">When our B2B channel helps us achieve true industry diversification, our entire portfolio becomes safer. We'll share that stability with you.</p>
                             <p class="mt-4 text-2xl font-bold text-gray-900">Additional 5% Discount</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- FAQ Section -->
+            <section id="faq" class="py-20 bg-gray-50">
+                <div class="container mx-auto px-6 py-16 max-w-4xl">
+                    <div class="text-center mb-12">
+                        <h3 class="text-3xl font-bold text-gray-900">Frequently Asked Questions</h3>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-lg shadow-sm border">
+                            <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                                <h4 class="font-semibold text-lg">What exactly is this?</h4>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
+                            </div>
+                            <div class="faq-answer px-6 pb-6">
+                                <p class="text-gray-600">It's a private financial product designed to provide you with a fixed monthly income if you experience an involuntary job loss. Think of it as a personal income safety net, completely independent of any employer-provided severance.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-sm border">
+                            <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                                <h4 class="font-semibold text-lg">Who is this for?</h4>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
+                            </div>
+                            <div class="faq-answer px-6 pb-6">
+                                <p class="text-gray-600">This is for any salaried professional in India who wants to protect their income and lifestyle from the uncertainty of the job market. It's particularly valuable for those in dynamic industries like tech, startups, and services.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-sm border">
+                            <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                                <h4 class="font-semibold text-lg">How does the cooling-off period work?</h4>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
+                            </div>
+                            <div class="faq-answer px-6 pb-6">
+                                <p class="text-gray-600">To ensure the long-term stability of the community fund, you must be a subscriber for a minimum period (e.g., 90 days) before you are eligible to make a claim. This prevents immediate claims and builds a strong, sustainable capital reserve to protect all members.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-sm border">
+                            <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                                <h4 class="font-semibold text-lg">How are claims verified?</h4>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
+                            </div>
+                            <div class="faq-answer px-6 pb-6">
+                                <p class="text-gray-600">Claims are verified digitally and securely. We require an official termination letter from your previous employer, final payslips, and bank statements to confirm your employment and income status. This ensures a fair and transparent process for everyone.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-sm border">
+                            <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                                <h4 class="font-semibold text-lg">Does receiving a severance package affect my claim?</h4>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
+                            </div>
+                            <div class="faq-answer px-6 pb-6">
+                                <p class="text-gray-600">No, your Cover Insurance policy payout is independent of any severance package you may receive from your employer. Our goal is to provide an additional layer of financial security during your transition, regardless of your company's severance policy.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-sm border">
+                            <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                                <h4 class="font-semibold text-lg">Who is eligible for a Cover Insurance policy?</h4>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
+                            </div>
+                            <div class="faq-answer px-6 pb-6">
+                                <p class="text-gray-600">Any salaried employee working full-time in a registered company in India is eligible to apply. Eligibility for specific plans may depend on your industry, salary, and job stability. We currently do not cover self-employed individuals or contract workers.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -314,70 +695,7 @@
         </div>
     </div>
     
-    <!-- FAQ Page -->
-    <div id="faqPage" class="page pt-24">
-        <div class="container mx-auto px-6 py-16 max-w-4xl">
-            <div class="text-center mb-12">
-                <h3 class="text-3xl font-bold text-gray-900">Frequently Asked Questions</h3>
-            </div>
-            <div class="space-y-6">
-                <div class="bg-white rounded-lg shadow-sm border">
-                    <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
-                        <h4 class="font-semibold text-lg">What exactly is this?</h4>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer px-6 pb-6">
-                        <p class="text-gray-600">It's a private financial product designed to provide you with a fixed monthly income if you experience an involuntary job loss. Think of it as a personal income safety net, completely independent of any employer-provided severance.</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-lg shadow-sm border">
-                    <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
-                        <h4 class="font-semibold text-lg">Who is this for?</h4>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer px-6 pb-6">
-                        <p class="text-gray-600">This is for any salaried professional in India who wants to protect their income and lifestyle from the uncertainty of the job market. It's particularly valuable for those in dynamic industries like tech, startups, and services.</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-lg shadow-sm border">
-                    <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
-                        <h4 class="font-semibold text-lg">How does the cooling-off period work?</h4>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer px-6 pb-6">
-                        <p class="text-gray-600">To ensure the long-term stability of the community fund, you must be a subscriber for a minimum period (e.g., 90 days) before you are eligible to make a claim. This prevents immediate claims and builds a strong, sustainable capital reserve to protect all members.</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-lg shadow-sm border">
-                    <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
-                        <h4 class="font-semibold text-lg">How are claims verified?</h4>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer px-6 pb-6">
-                        <p class="text-gray-600">Claims are verified digitally and securely. We require an official termination letter from your previous employer, final payslips, and bank statements to confirm your employment and income status. This ensures a fair and transparent process for everyone.</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-lg shadow-sm border">
-                    <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
-                        <h4 class="font-semibold text-lg">Does receiving a severance package affect my claim?</h4>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer px-6 pb-6">
-                        <p class="text-gray-600">No, your Cover Insurance policy payout is independent of any severance package you may receive from your employer. Our goal is to provide an additional layer of financial security during your transition, regardless of your company's severance policy.</p>
-                    </div>
-                </div>
-                 <div class="bg-white rounded-lg shadow-sm border">
-                    <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
-                        <h4 class="font-semibold text-lg">Who is eligible for a Cover Insurance policy?</h4>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer px-6 pb-6">
-                        <p class="text-gray-600">Any salaried employee working full-time in a registered company in India is eligible to apply. Eligibility for specific plans may depend on your industry, salary, and job stability. We currently do not cover self-employed individuals or contract workers.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Login Page -->
     <div id="loginPage" class="page pt-20 min-h-screen bg-gray-50">
@@ -715,7 +1033,12 @@
                     case 'forgot-password': showPage('forgotPasswordPage'); break;
                     case 'plans': showPage('plansPage'); break;
                     case 'business': showPage('businessPage'); break;
-                    case 'faq': showPage('faqPage'); break;
+                    case 'faq': 
+                        showPage('landingPage');
+                        setTimeout(() => {
+                            document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' });
+                        }, 50);
+                        break;
                     case 'calculator': 
                     case '':
                     default:
@@ -732,13 +1055,45 @@
         }
         
         function updateHeader() {
+            const mainNav = document.getElementById('main-nav');
+            const mobileNav = document.getElementById('mobile-nav');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileAuthLinks = document.getElementById('mobile-auth-links');
+            const mobileUserMenu = document.getElementById('mobile-user-menu');
+            const mobileUserGreeting = document.getElementById('mobile-user-greeting');
+            
             if (loggedInUser) {
                 authLinks.style.display = 'none';
                 userMenu.style.display = 'flex';
                 userGreeting.textContent = `Hi, ${loggedInUser.name}`;
+                
+                // Hide navigation menu items when logged in
+                if (mainNav) mainNav.style.display = 'none';
+                if (mobileNav) mobileNav.style.display = 'none';
+                if (mobileMenuButton) mobileMenuButton.style.display = 'none';
+                
+                // Mobile: Hide auth links, show user menu
+                if (mobileAuthLinks) mobileAuthLinks.style.display = 'none';
+                if (mobileUserMenu) {
+                    mobileUserMenu.style.display = 'flex';
+                    mobileUserMenu.classList.remove('hidden');
+                }
+                if (mobileUserGreeting) mobileUserGreeting.textContent = `Hi, ${loggedInUser.name}`;
             } else {
                 authLinks.style.display = 'flex';
                 userMenu.style.display = 'none';
+                
+                // Show navigation menu items when logged out
+                if (mainNav) mainNav.style.display = 'flex';
+                if (mobileNav) mobileNav.style.display = 'block';
+                if (mobileMenuButton) mobileMenuButton.style.display = 'block';
+                
+                // Mobile: Show auth links, hide user menu
+                if (mobileAuthLinks) mobileAuthLinks.style.display = 'flex';
+                if (mobileUserMenu) {
+                    mobileUserMenu.style.display = 'none';
+                    mobileUserMenu.classList.add('hidden');
+                }
             }
         }
 
@@ -773,6 +1128,15 @@
             loggedInUser = null;
             window.location.hash = '';
         });
+        
+        // Mobile logout button
+        const mobileLogoutButton = document.getElementById('mobile-logoutButton');
+        if (mobileLogoutButton) {
+            mobileLogoutButton.addEventListener('click', () => {
+                loggedInUser = null;
+                window.location.hash = '';
+            });
+        }
 
         // --- Signup Toggles ---
         const signupB2CToggle = document.getElementById('signupB2CToggle');
@@ -842,6 +1206,13 @@
         // --- Dynamic Plan Generation ---
         function generateAndShowPlans(event) {
             event.preventDefault();
+            
+            // Check if we're in business mode
+            if (currentMode === 'b2b') {
+                window.location.hash = 'business';
+                return;
+            }
+            
             const premium = parseFloat(document.getElementById('premiumResult').textContent.replace(/₹|,/g, ''));
             const salary = parseFloat(document.getElementById('calc-salary').value);
             const payout = parseFloat(document.getElementById('payoutValue').textContent.replace(/₹|,/g, ''));
@@ -980,6 +1351,52 @@
         payoutInput.addEventListener('input', calculatePremium);
         durationContainer.addEventListener('change', calculatePremium);
 
+        // --- Dark Mode Functions ---
+        function initDarkMode() {
+            // Check for saved theme preference or default to light mode
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                enableDarkMode();
+            } else {
+                disableDarkMode();
+            }
+        }
+        
+        function enableDarkMode() {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            updateDarkModeIcons(true);
+        }
+        
+        function disableDarkMode() {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            updateDarkModeIcons(false);
+        }
+        
+        function toggleDarkMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                disableDarkMode();
+            } else {
+                enableDarkMode();
+            }
+        }
+        
+        function updateDarkModeIcons(isDark) {
+            const lightIcons = document.querySelectorAll('.dark-mode-icon-light');
+            const darkIcons = document.querySelectorAll('.dark-mode-icon-dark');
+            
+            lightIcons.forEach(icon => {
+                icon.style.display = isDark ? 'none' : 'inline-block';
+            });
+            
+            darkIcons.forEach(icon => {
+                icon.style.display = isDark ? 'inline-block' : 'none';
+            });
+        }
+
         // --- FAQ Toggle Function ---
         function toggleFAQ(questionElement) {
             const answerElement = questionElement.nextElementSibling;
@@ -993,6 +1410,71 @@
                 chevronElement.classList.add('rotated');
             }
         }
+
+        // --- Mobile Menu Toggle ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+                
+                // Close mobile menu when clicking on a link
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+        });
+        
+        // --- Dark Mode Event Listeners ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize dark mode
+            initDarkMode();
+            
+            // Add event listeners to dark mode toggle buttons
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const darkModeToggleLoggedIn = document.getElementById('dark-mode-toggle-logged-in');
+            const mobileDarkModeToggle = document.getElementById('mobile-dark-mode-toggle');
+            const mobileDarkModeToggleLoggedIn = document.getElementById('mobile-dark-mode-toggle-logged-in');
+            
+            if (darkModeToggle) {
+                darkModeToggle.addEventListener('click', toggleDarkMode);
+            }
+            
+            if (darkModeToggleLoggedIn) {
+                darkModeToggleLoggedIn.addEventListener('click', toggleDarkMode);
+            }
+            
+            if (mobileDarkModeToggle) {
+                mobileDarkModeToggle.addEventListener('click', toggleDarkMode);
+            }
+            
+            if (mobileDarkModeToggleLoggedIn) {
+                mobileDarkModeToggleLoggedIn.addEventListener('click', toggleDarkMode);
+            }
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    if (e.matches) {
+                        enableDarkMode();
+                    } else {
+                        disableDarkMode();
+                    }
+                }
+            });
+        });
 
         // --- Initial Load ---
         document.addEventListener('DOMContentLoaded', () => {
@@ -1011,6 +1493,12 @@
                     signupB2CToggle.click();
                 }
             }
+            
+            // Ensure icons are updated after page load
+            setTimeout(() => {
+                lucide.createIcons();
+                updateDarkModeIcons(document.documentElement.classList.contains('dark'));
+            }, 100);
         });
     </script>
 </body>
