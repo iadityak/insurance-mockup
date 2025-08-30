@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Das Groups - Your Financial Safety Net</title>
+    <title>Cover Insurance - Your Financial Safety Net</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,9 +26,65 @@
         .calculator-toggle {
             transition: all 0.2s ease-in-out;
         }
-        /* Hide all pages by default */
         .page {
             display: none;
+        }
+        [x-cloak] { display: none !important; }
+        .faq-answer {
+            display: none;
+        }
+        .faq-answer.expanded {
+            display: block;
+        }
+        .faq-question {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .faq-question:hover {
+            background-color: #f9fafb;
+        }
+        .faq-chevron {
+            transition: transform 0.3s ease;
+        }
+        .faq-chevron.rotated {
+            transform: rotate(180deg);
+        }
+        input[type=range] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]:focus { outline: none; }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #2563eb;
+            cursor: pointer;
+            margin-top: -8px; 
+        }
+        input[type=range]::-moz-range-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #2563eb;
+            cursor: pointer;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #d1d5db;
+            border-radius: 5px;
+        }
+         input[type=range]::-moz-range-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #d1d5db;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -36,21 +93,30 @@
     <!-- Header -->
     <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-gray-200">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" id="homeLink" class="text-2xl font-bold text-gray-900 cursor-pointer">Cover Insurances</a>
+             <a href="#" class="flex items-center space-x-2" onclick="event.preventDefault(); window.location.hash = '';">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <h1 class="text-xl font-bold text-gray-900">Cover Insurance</h1>
+            </a>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#plans" class="text-gray-600 hover:text-blue-600">For Individuals</a>
+                <a href="#signup?type=b2b" class="text-gray-600 hover:text-blue-600">For Businesses</a>
+                <a href="#faq" class="text-gray-600 hover:text-blue-600">FAQs</a>
+            </div>
             <div id="auth-links" class="flex items-center space-x-4">
-                 <a href="#login" id="loginLink" class="text-gray-600 hover:text-blue-600 font-medium">Login</a>
-                 <a href="#signup" id="signupLink" class="cta-button bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700">
+                 <a href="#login" class="text-gray-600 hover:text-blue-600 font-medium">Log In</a>
+                 <a href="#signup?type=b2c" class="cta-button bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700">
                     Sign Up
                 </a>
             </div>
             <div id="user-menu" class="hidden items-center space-x-4">
                 <span id="user-greeting" class="font-medium text-gray-700"></span>
-                <button id="logoutButton" class="text-gray-600 hover:text-blue-600 font-medium">Logout</button>
+                <a href="#dashboard" class="font-semibold text-gray-600 hover:text-blue-600">My Dashboard</a>
+                <button id="logoutButton" class="text-gray-600 hover:text-blue-600 font-medium">Log Out</button>
             </div>
         </div>
     </header>
 
-    <!-- Main Landing Page Content -->
+    <!-- Main Landing Page -->
     <div id="landingPage" class="page">
         <main class="pt-20">
             <section class="hero-gradient py-20 sm:py-32">
@@ -69,7 +135,6 @@
                 </div>
             </section>
             
-            <!-- How It Works Section -->
             <section class="py-20 bg-white">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-12">
@@ -78,25 +143,19 @@
                     </div>
                     <div class="grid md:grid-cols-3 gap-10 text-center">
                         <div class="p-8 bg-gray-100 rounded-xl">
-                            <div class="bg-blue-200 text-blue-700 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 16v-2m0-8v-2m0 16V4m6 6h2m-16 0h2m14 0h2M4 12H2m18 0h-2m-2-6l1.414-1.414M5.414 5.414L4 4m14.142 14.142L18.414 18.414M5.414 18.414L4 20m16-8a8 8 0 11-16 0 8 8 0 0116 0z" /></svg>
-                            </div>
+                            <div class="bg-blue-200 text-blue-700 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6"><i data-lucide="sliders-horizontal" class="w-8 h-8"></i></div>
                             <h4 class="text-xl font-semibold mb-2">1. Customize Your Plan</h4>
                             <p class="text-gray-600">Choose the monthly payout and coverage duration that fits your life. One fair price for all individuals.</p>
                         </div>
                         <div class="p-8 bg-gray-100 rounded-xl">
-                            <div class="bg-blue-200 text-blue-700 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-                            </div>
+                            <div class="bg-blue-200 text-blue-700 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6"><i data-lucide="shield-check" class="w-8 h-8"></i></div>
                             <h4 class="text-xl font-semibold mb-2">2. Stay Protected</h4>
-                            <p class="text-gray-600">Our 2-year waiting period ensures a stable and secure community fund, ready to support you when you need it most.</p>
+                            <p class="text-gray-600">Our cooling-off period ensures a stable and secure community fund, ready to support you when you need it most.</p>
                         </div>
                         <div class="p-8 bg-gray-100 rounded-xl">
-                            <div class="bg-blue-200 text-blue-700 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                            </div>
+                            <div class="bg-blue-200 text-blue-700 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6"><i data-lucide="wallet" class="w-8 h-8"></i></div>
                             <h4 class="text-xl font-semibold mb-2">3. Receive Support</h4>
-                            <p class="text-gray-600">After a 30-day waiting period, receive your chosen monthly payout for the full duration of your plan, giving you breathing room to find the right next role.</p>
+                            <p class="text-gray-600">After a layoff, receive your chosen monthly payout for the full duration of your plan, giving you breathing room to find the right next role.</p>
                         </div>
                     </div>
                 </div>
@@ -116,41 +175,39 @@
                         <div class="grid md:grid-cols-2 gap-8 items-center">
                             <div class="space-y-6">
                                 <div>
-                                    <label for="salary" class="block font-medium text-gray-700">Your Monthly In-Hand Salary (₹)</label>
-                                    <input type="number" id="salary" min="30000" max="2000000" step="10000" value="150000" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                    <label for="calc-salary" class="block font-medium text-gray-700">Your Monthly In-Hand Salary (₹)</label>
+                                    <input type="number" id="calc-salary" min="30000" max="2000000" step="10000" value="75000" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3">
                                 </div>
                                 <div>
-                                    <label for="payout" class="block font-medium text-gray-700">Desired Monthly Payout (up to 80%)</label>
-                                    <input type="range" id="payout" min="10000" max="1000000" step="10000" value="100000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
-                                    <div class="text-right font-semibold text-gray-600 mt-1">₹<span id="payoutValue">1,00,000</span></div>
+                                    <label for="calc-payout" class="block font-medium text-gray-700">Desired Monthly Payout (up to 80%)</label>
+                                    <input type="range" id="calc-payout" min="10000" max="60000" step="1000" value="45000" class="w-full">
+                                    <div class="text-right font-semibold text-gray-600 mt-1">₹<span id="payoutValue">45,000</span></div>
                                 </div>
                                 <div>
                                     <label class="block font-medium text-gray-700">Coverage Duration</label>
                                     <div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-3" id="duration">
                                         <div><input type="radio" name="duration" value="3" id="d3" class="sr-only peer"><label for="d3" class="block text-center cursor-pointer rounded-lg border p-3 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600">3 Mths</label></div>
-                                        <div><input type="radio" name="duration" value="6" id="d6" class="sr-only peer" checked><label for="d6" class="block text-center cursor-pointer rounded-lg border p-3 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600">6 Mths</label></div>
+                                        <div><input type="radio" name="duration" value="4" id="d4" class="sr-only peer" checked><label for="d4" class="block text-center cursor-pointer rounded-lg border p-3 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600">4 Mths</label></div>
+                                        <div><input type="radio" name="duration" value="6" id="d6" class="sr-only peer"><label for="d6" class="block text-center cursor-pointer rounded-lg border p-3 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600">6 Mths</label></div>
                                         <div><input type="radio" name="duration" value="9" id="d9" class="sr-only peer"><label for="d9" class="block text-center cursor-pointer rounded-lg border p-3 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600">9 Mths</label></div>
-                                        <div><input type="radio" name="duration" value="12" id="d12" class="sr-only peer"><label for="d12" class="block text-center cursor-pointer rounded-lg border p-3 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600">12 Mths</label></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="bg-blue-50 p-8 rounded-xl text-center">
                                 <p id="premiumTitle" class="text-gray-600 font-medium">Your Estimated Premium</p>
                                 <div class="my-4">
-                                    <span class="text-5xl font-bold text-gray-900" id="premiumResult">₹5,556</span>
+                                    <span class="text-5xl font-bold text-gray-900" id="premiumResult">₹750</span>
                                     <span class="text-gray-600">/ month</span>
                                 </div>
-                                <p class="text-sm text-gray-500">(billed annually at ₹<span id="annualPremium">66,667</span>)</p>
-                                <a href="#signup" class="cta-button mt-6 w-full block bg-blue-600 text-white font-bold py-3 rounded-lg text-lg hover:bg-blue-700">
-                                    Get Started
+                                <a href="#plans" onclick="generateAndShowPlans(event)" class="cta-button mt-6 w-full block bg-blue-600 text-white font-bold py-3 rounded-lg text-lg hover:bg-blue-700">
+                                    View Plans
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </section>
-
+            
             <!-- Grow With Us Section -->
             <section class="py-20 bg-white">
                 <div class="container mx-auto px-6 max-w-4xl text-center">
@@ -170,67 +227,193 @@
                     </div>
                 </div>
             </section>
-
-            <!-- FAQ Section -->
-            <section class="py-20 bg-gray-50">
-                <div class="container mx-auto px-6 max-w-4xl">
-                    <div class="text-center mb-12">
-                        <h3 class="text-3xl font-bold text-gray-900">Frequently Asked Questions</h3>
-                    </div>
-                    <div class="space-y-6">
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h4 class="font-semibold text-lg">What exactly is this?</h4>
-                            <p class="text-gray-600 mt-2">It's a private financial product designed to provide you with a fixed monthly income if you experience an involuntary job loss. Think of it as a personal income safety net, completely independent of any employer-provided severance.</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h4 class="font-semibold text-lg">Who is this for?</h4>
-                            <p class="text-gray-600 mt-2">This is for any salaried professional in India who wants to protect their income and lifestyle from the uncertainty of the job market. It's particularly valuable for those in dynamic industries like tech, startups, and services.</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h4 class="font-semibold text-lg">How does the 2-year waiting period work?</h4>
-                            <p class="text-gray-600 mt-2">To ensure the long-term stability of the community fund, you must be a subscriber for a minimum of two full years before you are eligible to make a claim. This prevents immediate claims and builds a strong, sustainable capital reserve to protect all members.</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h4 class="font-semibold text-lg">How are claims verified?</h4>
-                            <p class="text-gray-600 mt-2">Claims are verified digitally and securely. We require an official termination letter from your previous employer and use public records like ITR and EPFO to confirm your employment status. This ensures a fair and transparent process for everyone.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </main>
     </div>
 
+    <!-- Plans Page -->
+     <main id="plansPage" class="page pt-24">
+        <div class="container mx-auto px-6 py-16">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-2">Your Tailored Policy Options</h2>
+            <p class="text-center text-gray-600 mb-10">Based on your details, here are some recommended plans.</p>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Standard Plan Card -->
+                <div id="standard-plan-card" class="bg-white p-6 rounded-xl shadow-lg border flex flex-col">
+                    <h3 class="text-xl font-semibold text-blue-600">Standard Plan</h3>
+                    <p class="text-gray-500 mt-1">Great starting point</p>
+                    <p class="text-4xl font-bold my-4">₹550<span class="text-lg font-medium text-gray-500">/month</span></p>
+                    <ul class="space-y-3 text-gray-700 mb-6 flex-grow">
+                       <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Covers 60% of salary</li>
+                       <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>3 months of payout</li>
+                       <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Email support</li>
+                    </ul>
+                    <a href="#signup?type=b2c" class="w-full text-center cta-button bg-blue-50 text-blue-700 font-bold py-3 rounded-lg hover:bg-blue-100">Choose Plan</a>
+                </div>
+                <!-- Recommended Plan Card -->
+                <div id="plus-plan-card" class="bg-white p-6 rounded-xl shadow-2xl border-2 border-blue-600 relative flex flex-col">
+                    <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">RECOMMENDED</div>
+                    <h3 class="text-xl font-semibold text-blue-600">Plus Plan</h3>
+                    <p class="text-gray-500 mt-1">Most popular choice</p>
+                    <p class="text-4xl font-bold my-4">₹750<span class="text-lg font-medium text-gray-500">/month</span></p>
+                     <ul class="space-y-3 text-gray-700 mb-6 flex-grow">
+                       <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Covers 70% of salary</li>
+                       <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>4 months of payout</li>
+                       <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Priority support</li>
+                       <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Career coaching session</li>
+                    </ul>
+                    <a href="#signup?type=b2c" class="w-full text-center cta-button bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700">Choose Plan</a>
+                </div>
+                <!-- Premium Plan Card -->
+                <div id="premium-plan-card" class="bg-white p-6 rounded-xl shadow-lg border flex flex-col">
+                    <h3 class="text-xl font-semibold text-blue-600">Premium Plan</h3>
+                    <p class="text-gray-500 mt-1">Maximum protection</p>
+                    <p class="text-4xl font-bold my-4">₹990<span class="text-lg font-medium text-gray-500">/month</span></p>
+                    <ul class="space-y-3 text-gray-700 mb-6 flex-grow">
+                       <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Covers 75% of salary</li>
+                       <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>6 months of payout</li>
+                       <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Dedicated support agent</li>
+                    </ul>
+                    <a href="#signup?type=b2c" class="w-full text-center cta-button bg-blue-50 text-blue-700 font-bold py-3 rounded-lg hover:bg-blue-100">Choose Plan</a>
+                </div>
+            </div>
+             <div class="text-center mt-12">
+                <a href="#calculator" class="text-blue-600 font-semibold hover:underline">
+                    &larr; Go back and customize your calculation
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Business Page -->
+    <div id="businessPage" class="page pt-20">
+         <div class="bg-white">
+            <div class="container mx-auto px-6 py-20 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900">Support your team through transitions.</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Offer Cover Insurance as an employee benefit to enhance your offboarding process, protect your brand, and provide a soft landing for departing team members.</p>
+                <a href="#signup?type=b2b" class="cta-button mt-8 inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 shadow-md text-lg">Request a Demo</a>
+            </div>
+        </div>
+        <div class="container mx-auto px-6 py-20">
+            <h3 class="text-3xl font-bold text-center mb-12">Benefits for Your Business</h3>
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="text-center p-6">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto mb-4"><i data-lucide="shield-heart" class="w-8 h-8"></i></div>
+                    <h4 class="text-xl font-semibold mb-2">Enhance Employer Brand</h4>
+                    <p class="text-gray-600">Show that you care for employees even after they leave, fostering goodwill and a positive market reputation.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto mb-4"><i data-lucide="trending-up" class="w-8 h-8"></i></div>
+                    <h4 class="text-xl font-semibold mb-2">Improve Team Morale</h4>
+                    <p class="text-gray-600">Provide a safety net for your current workforce, reducing anxiety around organizational changes.</p>
+                </div>
+                 <div class="text-center p-6">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto mb-4"><i data-lucide="mouse-pointer-click" class="w-8 h-8"></i></div>
+                    <h4 class="text-xl font-semibold mb-2">Streamlined Process</h4>
+                    <p class="text-gray-600">Our simple dashboard makes it easy to manage employees and handle offboarding notifications seamlessly.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FAQ Page -->
+    <div id="faqPage" class="page pt-24">
+        <div class="container mx-auto px-6 py-16 max-w-4xl">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-gray-900">Frequently Asked Questions</h3>
+            </div>
+            <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-sm border">
+                    <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <h4 class="font-semibold text-lg">What exactly is this?</h4>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
+                    </div>
+                    <div class="faq-answer px-6 pb-6">
+                        <p class="text-gray-600">It's a private financial product designed to provide you with a fixed monthly income if you experience an involuntary job loss. Think of it as a personal income safety net, completely independent of any employer-provided severance.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm border">
+                    <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <h4 class="font-semibold text-lg">Who is this for?</h4>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
+                    </div>
+                    <div class="faq-answer px-6 pb-6">
+                        <p class="text-gray-600">This is for any salaried professional in India who wants to protect their income and lifestyle from the uncertainty of the job market. It's particularly valuable for those in dynamic industries like tech, startups, and services.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm border">
+                    <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <h4 class="font-semibold text-lg">How does the cooling-off period work?</h4>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
+                    </div>
+                    <div class="faq-answer px-6 pb-6">
+                        <p class="text-gray-600">To ensure the long-term stability of the community fund, you must be a subscriber for a minimum period (e.g., 90 days) before you are eligible to make a claim. This prevents immediate claims and builds a strong, sustainable capital reserve to protect all members.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm border">
+                    <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <h4 class="font-semibold text-lg">How are claims verified?</h4>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
+                    </div>
+                    <div class="faq-answer px-6 pb-6">
+                        <p class="text-gray-600">Claims are verified digitally and securely. We require an official termination letter from your previous employer, final payslips, and bank statements to confirm your employment and income status. This ensures a fair and transparent process for everyone.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm border">
+                    <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <h4 class="font-semibold text-lg">Does receiving a severance package affect my claim?</h4>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
+                    </div>
+                    <div class="faq-answer px-6 pb-6">
+                        <p class="text-gray-600">No, your Cover Insurance policy payout is independent of any severance package you may receive from your employer. Our goal is to provide an additional layer of financial security during your transition, regardless of your company's severance policy.</p>
+                    </div>
+                </div>
+                 <div class="bg-white rounded-lg shadow-sm border">
+                    <div class="faq-question p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <h4 class="font-semibold text-lg">Who is eligible for a Cover Insurance policy?</h4>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 faq-chevron"></i>
+                    </div>
+                    <div class="faq-answer px-6 pb-6">
+                        <p class="text-gray-600">Any salaried employee working full-time in a registered company in India is eligible to apply. Eligibility for specific plans may depend on your industry, salary, and job stability. We currently do not cover self-employed individuals or contract workers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Login Page -->
-    <div id="loginPage" class="page pt-32 min-h-screen bg-gray-50 flex flex-col items-center">
-        <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
+    <div id="loginPage" class="page pt-20 min-h-screen bg-gray-50">
+        <div class="container mx-auto px-6 py-16 max-w-sm">
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
             <h2 class="text-3xl font-bold text-center text-gray-900">Welcome Back</h2>
             <div class="mt-6">
                 <form id="loginForm" class="space-y-6">
                      <div>
                         <label for="loginEmail" class="block text-sm font-medium text-gray-700">Email address</label>
-                        <input id="loginEmail" name="email" type="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-blue-500 focus:ring-blue-500">
+                        <input id="loginEmail" name="email" type="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-blue-500 focus:ring-blue-500" value="priya@example.com">
                     </div>
                     <div>
                         <label for="loginPassword" class="block text-sm font-medium text-gray-700">Password</label>
-                        <input id="loginPassword" name="password" type="password" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-blue-500 focus:ring-blue-500">
+                        <input id="loginPassword" name="password" type="password" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-blue-500 focus:ring-blue-500" value="password123">
                     </div>
                     <div class="flex items-center justify-between">
-                        <a href="#forgot-password" id="forgotPasswordLink" class="text-sm text-blue-600 hover:text-blue-500">Forgot your password?</a>
+                        <a href="#forgot-password" class="text-sm text-blue-600 hover:text-blue-500">Forgot your password?</a>
                     </div>
                     <div>
                         <button type="submit" class="w-full cta-button bg-blue-600 text-white font-bold py-3 rounded-lg text-lg hover:bg-blue-700">Log In</button>
                     </div>
                 </form>
-                <p class="mt-6 text-center text-sm text-gray-600">
-                    Don't have an account? <a href="#signup" id="loginToSignupLink" class="font-medium text-blue-600 hover:text-blue-500">Sign up</a>
+                <p class="text-xs text-center text-gray-500 mt-4">Hint: Try 'admin@acme.com' to see the business view.</p>
+                <p class="mt-4 text-center text-sm text-gray-600">
+                    Don't have an account? <a href="#signup" class="font-medium text-blue-600 hover:text-blue-500">Sign up</a>
                 </p>
+            </div>
             </div>
         </div>
     </div>
 
-    <!-- Signup Page -->
-    <div id="signupPage" class="page pt-32 min-h-screen bg-gray-50 flex flex-col items-center">
-        <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
+    <!-- Signup Page (includes Onboarding Trigger) -->
+    <div id="signupPage" class="page pt-20 min-h-screen bg-gray-50">
+        <div class="container mx-auto px-6 py-16 max-w-sm">
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
             <h2 class="text-3xl font-bold text-center text-gray-900">Create Your Account</h2>
             <div class="mt-6 mb-6 p-1 bg-gray-200 rounded-lg flex justify-center max-w-sm mx-auto">
                 <button id="signupB2CToggle" class="calculator-toggle w-1/2 py-2 px-4 rounded-md bg-white text-blue-600 font-semibold shadow">Individual</button>
@@ -244,10 +427,6 @@
                     </div>
                 </div>
                 <div id="b2b-fields" class="hidden space-y-4">
-                    <div>
-                        <label for="signupB2BName" class="block text-sm font-medium text-gray-700">Your Full Name</label>
-                        <input id="signupB2BName" name="b2b_name" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-blue-500 focus:ring-blue-500">
-                    </div>
                      <div>
                         <label for="signupCompanyName" class="block text-sm font-medium text-gray-700">Company Name</label>
                         <input id="signupCompanyName" name="company_name" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-blue-500 focus:ring-blue-500">
@@ -266,8 +445,9 @@
                 </div>
             </form>
             <p class="mt-6 text-center text-sm text-gray-600">
-                Already have an account? <a href="#login" id="signupToLoginLink" class="font-medium text-blue-600 hover:text-blue-500">Log in</a>
+                Already have an account? <a href="#login" class="font-medium text-blue-600 hover:text-blue-500">Log in</a>
             </p>
+            </div>
         </div>
     </div>
     
@@ -286,53 +466,191 @@
                 </div>
             </form>
              <p class="mt-6 text-center text-sm text-gray-600">
-                Remembered your password? <a href="#login" id="forgotToLoginLink" class="font-medium text-blue-600 hover:text-blue-500">Log in</a>
+                Remembered your password? <a href="#login" class="font-medium text-blue-600 hover:text-blue-500">Log in</a>
             </p>
         </div>
     </div>
+    
+    <!-- Onboarding / KYC Page -->
+    <main id="onboardingPage" class="page pt-32 min-h-screen bg-gray-50 flex flex-col items-center">
+        <div class="container mx-auto px-6 max-w-md">
+            <div class="bg-white p-8 rounded-xl shadow-lg border">
+                <h3 class="text-xl font-semibold mb-4 text-center">Verification Required</h3>
+                <div class="space-y-4">
+                    <!-- Identity Verification -->
+                    <div id="identity-step" class="p-4 border rounded-lg flex justify-between items-center">
+                        <div>
+                            <h4 class="font-semibold">1. Identity Verification</h4>
+                            <p class="text-sm text-gray-500">Upload your PAN or Aadhaar card.</p>
+                        </div>
+                        <button class="cta-button bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300" onclick="simulateVerification('identity')">Start</button>
+                    </div>
+                    <div id="identity-loading" class="hidden p-4 border rounded-lg flex items-center space-x-3">
+                        <svg class="animate-spin h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                        <span>Verifying ID... Please wait.</span>
+                    </div>
+                    <div id="identity-done" class="hidden p-4 border-green-300 bg-green-50 rounded-lg flex justify-between items-center">
+                        <div class="flex items-center space-x-2"><i data-lucide="check-circle" class="w-5 h-5 text-green-600"></i><h4 class="font-semibold text-green-800">Identity Verified</h4></div>
+                    </div>
 
-    <!-- Dashboard Page -->
-    <div id="dashboardPage" class="page pt-24 container mx-auto px-6">
-        <div id="b2cDashboard" class="hidden">
-            <h2 class="text-3xl font-bold text-gray-900">My Policy Dashboard</h2>
-            <div class="mt-8 bg-white p-8 rounded-xl shadow-lg">
-                <h3 class="text-xl font-semibold">Individual Plan Details</h3>
-                <p class="mt-4 text-gray-600">Status: <span class="font-bold text-green-600">Active</span></p>
-                <p class="mt-2 text-gray-600">Coverage: ₹50,000 / month for 6 months</p>
-                <p class="mt-2 text-gray-600">Renewal Date: 31 Aug, 2026</p>
-                <button class="cta-button mt-6 bg-blue-100 text-blue-700 font-semibold px-5 py-2 rounded-lg hover:bg-blue-200">Manage Policy</button>
+                    <!-- Employment Verification -->
+                     <div id="employment-step" class="hidden p-4 border rounded-lg flex justify-between items-center">
+                        <div>
+                            <h4 class="font-semibold">2. Employment Verification</h4>
+                            <p class="text-sm text-gray-500">Upload recent payslips.</p>
+                        </div>
+                        <button class="cta-button bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300" onclick="simulateVerification('employment')">Start</button>
+                    </div>
+                     <div id="employment-loading" class="hidden p-4 border rounded-lg flex items-center space-x-3">
+                        <svg class="animate-spin h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                        <span>Verifying Employment...</span>
+                    </div>
+                    <div id="employment-done" class="hidden p-4 border-green-300 bg-green-50 rounded-lg flex justify-between items-center">
+                         <div class="flex items-center space-x-2"><i data-lucide="check-circle" class="w-5 h-5 text-green-600"></i><h4 class="font-semibold text-green-800">Employment Verified</h4></div>
+                    </div>
+                </div>
+                <a href="#payment" id="payment-btn" class="hidden cta-button w-full text-center bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 mt-6">Proceed to Payment</a>
             </div>
         </div>
-        <div id="b2bDashboard" class="hidden">
-            <h2 class="text-3xl font-bold text-gray-900">Company Dashboard</h2>
-            <div class="mt-8 bg-white p-8 rounded-xl shadow-lg">
-                <h3 class="text-xl font-semibold">Acme Corporation - Group Plan</h3>
-                <p class="mt-4 text-gray-600">Status: <span class="font-bold text-green-600">Active</span></p>
-                <p class="mt-2 text-gray-600">Covered Employees: 300</p>
-                <p class="mt-2 text-gray-600">Next Billing Date: 01 Oct, 2025</p>
-                <button class="cta-button mt-6 bg-blue-100 text-blue-700 font-semibold px-5 py-2 rounded-lg hover:bg-blue-200">Manage Employees</button>
+    </main>
+
+    <!-- Payment Page -->
+     <main id="paymentPage" class="page pt-32 min-h-screen bg-gray-50 flex flex-col items-center">
+        <div class="container mx-auto px-6 max-w-md">
+             <div class="bg-white p-8 rounded-xl shadow-lg border">
+                <h2 class="text-2xl font-bold text-center text-gray-900 mb-8">Secure Your Policy</h2>
+                <div class="mb-6 border-b pb-4">
+                    <h3 class="text-lg font-semibold">Plus Plan</h3>
+                    <div class="flex justify-between items-baseline mt-2">
+                        <span class="text-gray-600">Monthly Premium</span>
+                        <span class="font-bold text-xl">₹750.00</span>
+                    </div>
+                </div>
+                <h4 class="font-semibold mb-4">Payment Details</h4>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
+                        <div class="p-3 border rounded-lg flex items-center space-x-2"><i data-lucide="credit-card" class="w-5 h-5 text-gray-400"></i><input class="w-full outline-none" placeholder="•••• •••• •••• 4242"></div>
+                    </div>
+                    <div class="flex space-x-4">
+                        <div class="w-1/2"><label class="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label><input class="w-full p-3 border rounded-lg" placeholder="MM / YY"></div>
+                        <div class="w-1/2"><label class="block text-sm font-medium text-gray-700 mb-1">CVC</label><input class="w-full p-3 border rounded-lg" placeholder="•••"></div>
+                    </div>
+                </div>
+                 <div class="mt-6 flex items-start">
+                    <input type="checkbox" id="terms" class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                    <label for="terms" class="ml-2 text-sm text-gray-600">I have read and agree to the <a href="#" class="text-blue-600 hover:underline">terms and conditions</a> and policy document.</label>
+                </div>
+                <button class="w-full cta-button bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 mt-6" onclick="activatePolicy()">Activate My Policy</button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Dashboard Page -->
+    <div id="dashboardPage" class="page pt-24 container mx-auto px-6">
+        <!-- B2C Dashboard View -->
+        <div id="b2cDashboard">
+             <h2 class="text-3xl font-bold text-gray-900 mb-6">Welcome back, Priya!</h2>
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <!-- Main Status Card -->
+                    <div id="status-card-active" class="bg-white p-8 rounded-xl shadow-lg border">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-2xl font-bold">Policy Status: Active</h3>
+                                <p class="text-green-600 font-semibold bg-green-100 inline-block px-3 py-1 rounded-full text-sm mt-2">You are protected</p>
+                            </div>
+                            <div class="text-right">
+                                 <p class="text-gray-500">Next Premium</p>
+                                 <p class="font-bold text-lg">₹750.00 on 1st Sep 2025</p>
+                            </div>
+                        </div>
+                        <div class="mt-8 pt-6 border-t">
+                             <h4 class="font-semibold mb-4">Your Coverage</h4>
+                             <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center">
+                                 <div><p class="text-gray-500 text-sm">Payout Amount</p><p class="font-bold text-xl">₹52,500 / month</p></div>
+                                 <div><p class="text-gray-500 text-sm">Duration</p><p class="font-bold text-xl">4 Months</p></div>
+                                 <div><p class="text-gray-500 text-sm">Plan</p><p class="font-bold text-xl">Plus Plan</p></div>
+                             </div>
+                        </div>
+                    </div>
+                     <!-- Claim Status Card -->
+                    <div id="status-card-claim" class="hidden bg-white p-8 rounded-xl shadow-lg border">
+                        <h3 class="text-2xl font-bold mb-4">Claim Status: Under Review</h3>
+                        <p class="text-gray-600 mb-6">We have received your claim and documents. Our team is reviewing them and we will update you within 3-5 business days.</p>
+                        <ol class="relative text-gray-500 border-s border-gray-200">                  
+                            <li class="mb-10 ms-6 text-blue-600 font-bold"><span class="absolute flex items-center justify-center w-8 h-8 bg-blue-100 rounded-full -start-4 ring-4 ring-white"><i data-lucide="check-circle" class="w-5 h-5"></i></span><h3 class="font-medium leading-tight">Claim Submitted</h3><p class="text-sm">30th Aug 2025</p></li>
+                            <li class="mb-10 ms-6"><span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white"><i data-lucide="file-clock" class="w-5 h-5"></i></span><h3 class="font-medium leading-tight">In Review</h3></li>
+                            <li class="ms-6"><span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white"><i data-lucide="wallet" class="w-5 h-5"></i></span><h3 class="font-medium leading-tight">Payouts Begin</h3></li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- Actions Column -->
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border"><h3 class="font-bold text-lg mb-4">Actions</h3><a href="#claim" class="w-full block text-center cta-button bg-red-500 text-white font-bold py-3 rounded-lg hover:bg-red-600">File a Claim</a><button class="w-full mt-3 cta-button bg-gray-100 text-gray-700 font-bold py-3 rounded-lg hover:bg-gray-200">Download Policy</button></div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border"><h3 class="font-bold text-lg mb-4">Payment History</h3><ul class="space-y-3"><li class="flex justify-between text-sm"><span>1st Aug 2025</span><span class="font-medium">₹750.00</span></li><li class="flex justify-between text-sm"><span>1st Jul 2025</span><span class="font-medium">₹750.00</span></li><li class="flex justify-between text-sm"><span>1st Jun 2025</span><span class="font-medium">₹750.00</span></li></ul><a href="#" class="text-blue-600 text-sm font-semibold mt-3 inline-block">View All</a></div>
+                </div>
+            </div>
+        </div>
+        <!-- B2B Dashboard View -->
+        <div id="b2bDashboard">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-900">Corporate Dashboard: Acme India Pvt. Ltd.</h2>
+                <div class="space-x-3">
+                     <button class="cta-button bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 flex items-center space-x-2"><i data-lucide="user-plus" class="w-5 h-5"></i><span>Add Employees</span></button>
+                     <button class="cta-button bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 flex items-center space-x-2"><i data-lucide="user-minus" class="w-5 h-5"></i><span>Report Layoff</span></button>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border"><h4 class="text-gray-500 font-semibold">Employees Covered</h4><p class="text-3xl font-bold mt-2">142</p></div>
+                 <div class="bg-white p-6 rounded-xl shadow-lg border"><h4 class="text-gray-500 font-semibold">Monthly Premium</h4><p class="text-3xl font-bold mt-2">₹1,06,500</p></div>
+                 <div class="bg-white p-6 rounded-xl shadow-lg border"><h4 class="text-gray-500 font-semibold">Active Claims</h4><p class="text-3xl font-bold mt-2">2</p></div>
+                 <div class="bg-white p-6 rounded-xl shadow-lg border"><h4 class="text-gray-500 font-semibold">Default Plan</h4><p class="text-3xl font-bold mt-2">Plus Plan</p></div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg border">
+                <h3 class="font-bold text-xl mb-4">Covered Employee Roster</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead><tr class="border-b bg-gray-50"><th class="p-3 font-semibold">Employee Name</th><th class="p-3 font-semibold">Employee ID</th><th class="p-3 font-semibold">Policy Plan</th><th class="p-3 font-semibold">Status</th></tr></thead>
+                        <tbody>
+                            <tr class="border-b"><td class="p-3">Aarav Sharma</td><td class="p-3">ACME-0532</td><td class="p-3">Plus Plan</td><td class="p-3"><span class="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">Active</span></td></tr>
+                            <tr class="border-b"><td class="p-3">Diya Patel</td><td class="p-3">ACME-0781</td><td class="p-3">Plus Plan</td><td class="p-3"><span class="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">Active</span></td></tr>
+                            <tr class="border-b"><td class="p-3">Rohan Mehta</td><td class="p-3">ACME-0219</td><td class="p-3">Premium Plan</td><td class="p-3"><span class="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">Active</span></td></tr>
+                             <tr class="border-b"><td class="p-3">Isha Singh</td><td class="p-3">ACME-0115</td><td class="p-3">Plus Plan</td><td class="p-3"><span class="bg-yellow-100 text-yellow-700 text-xs font-semibold px-2 py-1 rounded-full">Claim Processing</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+    
+    <!-- Claim Initiation Page -->
+    <main id="claimPage" class="page pt-32 min-h-screen bg-gray-50 flex flex-col items-center">
+        <div class="container mx-auto px-6 max-w-2xl">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-2">File a Claim</h2>
+            <p class="text-center text-gray-600 mb-8">We're here to help. Please provide the following details.</p>
+            <div class="bg-white p-8 rounded-xl shadow-lg border">
+                <div class="mb-6"><h3 class="text-lg font-semibold mb-4 border-b pb-2">1. Layoff Details</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label class="block text-sm font-medium text-gray-700 mb-1">Last Day of Employment</label><input type="date" class="w-full p-2 border rounded-lg"></div><div><label class="block text-sm font-medium text-gray-700 mb-1">Company Name</label><input type="text" class="w-full p-2 border rounded-lg" value="Example Corp" disabled></div></div></div>
+                <div class="mb-6"><h3 class="text-lg font-semibold mb-4 border-b pb-2">2. Required Documents</h3><p class="text-sm text-gray-500 mb-4">Please upload your official termination letter and your final payslip.</p><div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"><div class="space-y-1 text-center"><i data-lucide="upload-cloud" class="mx-auto h-12 w-12 text-gray-400"></i><div class="flex text-sm text-gray-600"><label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"><span>Upload files</span><input id="file-upload" name="file-upload" type="file" class="sr-only" multiple></label><p class="pl-1">or drag and drop</p></div><p class="text-xs text-gray-500">PNG, JPG, PDF up to 10MB</p></div></div></div>
+                <div><h3 class="text-lg font-semibold mb-4 border-b pb-2">3. Confirm Payout Account</h3><div class="p-4 bg-gray-100 rounded-lg flex items-center justify-between"><div class="flex items-center space-x-3"><i data-lucide="landmark" class="w-6 h-6 text-gray-500"></i><div><p class="font-semibold">HDFC Bank</p><p class="text-sm text-gray-600">Savings Account ending in •••• 1234</p></div></div><span class="text-sm font-medium text-green-700">Verified</span></div></div>
+                <button class="w-full cta-button bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 mt-8" onclick="submitClaim()">Submit My Claim</button>
+                <a href="#dashboard" class="w-full text-center mt-4 text-gray-600 text-sm hover:underline">Cancel</a>
+            </div>
+        </div>
+    </main>
 
     <!-- Footer for all pages -->
-    <footer class="bg-gray-900 text-white py-8 mt-16">
+    <footer class="bg-gray-900 text-white py-8">
         <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2025 Das Group Companies Private Limited. All rights reserved.</p>
+            <p>&copy; 2025 Cover Insurance Private Limited. All rights reserved.</p>
             <p class="text-sm text-gray-400 mt-2">This is a prototype for illustrative purposes. Not a real financial product.</p>
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script>
         // --- Page Router & State Management ---
         const pages = document.querySelectorAll('.page');
-        const homeLink = document.getElementById('homeLink');
-        const loginLink = document.getElementById('loginLink');
-        const signupLink = document.getElementById('signupLink');
-        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
-        const loginToSignupLink = document.getElementById('loginToSignupLink');
-        const signupToLoginLink = document.getElementById('signupToLoginLink');
-        const forgotToLoginLink = document.getElementById('forgotToLoginLink');
         const authLinks = document.getElementById('auth-links');
         const userMenu = document.getElementById('user-menu');
         const userGreeting = document.getElementById('user-greeting');
@@ -345,32 +663,69 @@
                 page.style.display = (page.id === pageId) ? 'block' : 'none';
             });
             window.scrollTo(0, 0);
+            lucide.createIcons();
         }
 
         function handleRouteChange() {
-            const hash = window.location.hash.substring(1);
-            if (loggedInUser) {
-                showPage('dashboardPage');
-                if (loggedInUser.type === 'b2c') {
-                    document.getElementById('b2cDashboard').style.display = 'block';
-                    document.getElementById('b2bDashboard').style.display = 'none';
-                } else {
-                    document.getElementById('b2bDashboard').style.display = 'block';
-                    document.getElementById('b2cDashboard').style.display = 'none';
+            const hashFull = window.location.hash.substring(1);
+            const hash = hashFull.split('?')[0];
+            if (loggedInUser && !['login', 'signup', 'forgot-password', ''].includes(hash)) {
+                 switch (hash) {
+                    case 'dashboard':
+                        showPage('dashboardPage');
+                        if (loggedInUser.type === 'b2c') {
+                            document.getElementById('b2cDashboard').style.display = 'block';
+                            document.getElementById('b2bDashboard').style.display = 'none';
+                        } else {
+                            document.getElementById('b2bDashboard').style.display = 'block';
+                            document.getElementById('b2cDashboard').style.display = 'none';
+                        }
+                        break;
+                    case 'claim':
+                        showPage('claimPage');
+                        break;
+                    case 'payment':
+                         showPage('paymentPage');
+                         break;
+                    case 'onboarding':
+                        showPage('onboardingPage');
+                        break;
+                    default:
+                        showPage('dashboardPage');
                 }
             } else {
                  switch (hash) {
-                    case 'login':
-                        showPage('loginPage');
-                        break;
-                    case 'signup':
+                    case 'login': showPage('loginPage'); break;
+                    case 'signup': 
                         showPage('signupPage');
+                        try {
+                            const query = hashFull.split('?')[1] || '';
+                            const params = new URLSearchParams(query);
+                            const type = params.get('type');
+                            // Use setTimeout to ensure the page is fully loaded before clicking
+                            setTimeout(() => {
+                                if (type === 'b2b') {
+                                    document.getElementById('signupB2BToggle')?.click();
+                                } else if (type === 'b2c') {
+                                    document.getElementById('signupB2CToggle')?.click();
+                                }
+                            }, 50);
+                        } catch (e) {}
                         break;
-                    case 'forgot-password':
-                        showPage('forgotPasswordPage');
-                        break;
+                    case 'forgot-password': showPage('forgotPasswordPage'); break;
+                    case 'plans': showPage('plansPage'); break;
+                    case 'business': showPage('businessPage'); break;
+                    case 'faq': showPage('faqPage'); break;
+                    case 'calculator': 
+                    case '':
                     default:
-                        showPage('landingPage');
+                        showPage('landingPage'); 
+                        if (hash === 'calculator') {
+                            setTimeout(() => {
+                                document.getElementById('calculator')?.scrollIntoView();
+                            }, 50);
+                        }
+                        break;
                 }
             }
             updateHeader();
@@ -388,38 +743,38 @@
         }
 
         window.addEventListener('hashchange', handleRouteChange);
-        homeLink.addEventListener('click', (e) => { e.preventDefault(); window.location.hash = ''; handleRouteChange(); });
-        loginLink.addEventListener('click', () => { window.location.hash = 'login'; });
-        signupLink.addEventListener('click', () => { window.location.hash = 'signup'; });
-        forgotPasswordLink.addEventListener('click', () => { window.location.hash = 'forgot-password'; });
-        loginToSignupLink.addEventListener('click', () => { window.location.hash = 'signup'; });
-        signupToLoginLink.addEventListener('click', () => { window.location.hash = 'login'; });
-        forgotToLoginLink.addEventListener('click', () => { window.location.hash = 'login'; });
+        window.addEventListener('popstate', handleRouteChange);
 
-        const loginForm = document.getElementById('loginForm');
-        loginForm.addEventListener('submit', (e) => {
+        // --- Auth Forms ---
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            loggedInUser = { type: 'b2c', name: 'Kirandas' };
+            const email = e.target.email.value;
+            if (email.toLowerCase().includes('acme')) {
+                loggedInUser = { type: 'b2b', name: 'Acme India' };
+            } else {
+                loggedInUser = { type: 'b2c', name: 'Priya' };
+            }
             window.location.hash = 'dashboard';
-            handleRouteChange();
         });
 
-        const signupForm = document.getElementById('signupForm');
-        signupForm.addEventListener('submit', (e) => {
+        document.getElementById('signupForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const type = document.getElementById('signupB2CToggle').classList.contains('bg-white') ? 'b2c' : 'b2b';
-            const name = (type === 'b2c') ? e.target.name.value : e.target.b2b_name.value;
+            const name = (type === 'b2c') ? (e.target.name.value || 'Riya Sharma') : (e.target.company_name.value || 'Cover Insurance Client Co.');
             loggedInUser = { type, name };
-            window.location.hash = 'dashboard';
-            handleRouteChange();
+            if (type === 'b2c') {
+                window.location.hash = 'onboarding';
+            } else {
+                 window.location.hash = 'dashboard';
+            }
         });
         
         logoutButton.addEventListener('click', () => {
             loggedInUser = null;
             window.location.hash = '';
-            handleRouteChange();
         });
 
+        // --- Signup Toggles ---
         const signupB2CToggle = document.getElementById('signupB2CToggle');
         const signupB2BToggle = document.getElementById('signupB2BToggle');
         const b2cFields = document.getElementById('b2c-fields');
@@ -442,20 +797,143 @@
             b2cFields.style.display = 'none';
         });
 
+        // Prefill mock values for signup
+        document.getElementById('signupEmail').value = 'riya@example.com';
+        document.getElementById('signupPassword').value = 'Password@123';
+        document.getElementById('signupName').value = 'Riya Sharma';
+        document.getElementById('signupCompanyName').value = 'Cover Insurance Client Co.';
+        
+        // --- KYC Simulation ---
+        function simulateVerification(step) {
+            const stepEl = document.getElementById(`${step}-step`);
+            const loadingEl = document.getElementById(`${step}-loading`);
+            const doneEl = document.getElementById(`${step}-done`);
+            
+            stepEl.style.display = 'none';
+            loadingEl.style.display = 'flex';
+            
+            setTimeout(() => {
+                loadingEl.style.display = 'none';
+                doneEl.style.display = 'flex';
+                lucide.createIcons();
+                
+                if (step === 'identity') {
+                    document.getElementById('employment-step').style.display = 'flex';
+                } else if (step === 'employment') {
+                    document.getElementById('payment-btn').style.display = 'block';
+                }
+            }, 2000);
+        }
+        
+        function activatePolicy() {
+             window.location.hash = 'dashboard';
+        }
+
+        // --- Claim Simulation ---
+        function submitClaim() {
+            window.location.hash = 'dashboard';
+            setTimeout(() => {
+                document.getElementById('status-card-active').style.display = 'none';
+                document.getElementById('status-card-claim').style.display = 'block';
+                lucide.createIcons();
+            }, 50);
+        }
+
+        // --- Dynamic Plan Generation ---
+        function generateAndShowPlans(event) {
+            event.preventDefault();
+            const premium = parseFloat(document.getElementById('premiumResult').textContent.replace(/₹|,/g, ''));
+            const salary = parseFloat(document.getElementById('calc-salary').value);
+            const payout = parseFloat(document.getElementById('payoutValue').textContent.replace(/₹|,/g, ''));
+            const duration = parseInt(document.querySelector('input[name="duration"]:checked').value);
+            const coveragePercent = Math.round((payout / salary) * 100);
+
+            const plusPlan = {
+                name: 'Plus Plan',
+                premium,
+                features: [
+                    `Covers ${coveragePercent}% of salary`,
+                    `${duration} months of payout`,
+                    'Priority support',
+                    'Career coaching session'
+                ]
+            };
+
+            const standardPlan = {
+                name: 'Standard Plan',
+                premium: Math.round(premium * 0.75 / 10) * 10,
+                features: [
+                    `Covers ${Math.max(40, coveragePercent - 10)}% of salary`,
+                    `${Math.max(2, duration - 1)} months of payout`,
+                    'Email support'
+                ]
+            };
+
+            const premiumPlan = {
+                name: 'Premium Plan',
+                premium: Math.round(premium * 1.25 / 10) * 10,
+                features: [
+                    `Covers ${Math.min(80, coveragePercent + 5)}% of salary`,
+                    `${Math.min(9, duration + 2)} months of payout`,
+                    'Dedicated support agent',
+                    'Resume review service'
+                ]
+            };
+            
+            updatePlanCard('standard-plan-card', standardPlan, false);
+            updatePlanCard('plus-plan-card', plusPlan, true);
+            updatePlanCard('premium-plan-card', premiumPlan, false);
+
+            window.location.hash = 'plans';
+        }
+
+        function updatePlanCard(cardId, planData, isRecommended) {
+            const card = document.getElementById(cardId);
+            if (!card) return;
+
+            card.querySelector('h3').textContent = planData.name;
+            card.querySelector('.text-4xl').innerHTML = `₹${planData.premium.toLocaleString('en-IN')}<span class="text-lg font-medium text-gray-500">/month</span>`;
+            
+            const featureList = card.querySelector('ul');
+            featureList.innerHTML = '';
+            planData.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.className = 'flex items-center';
+                li.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>${feature}`;
+                featureList.appendChild(li);
+            });
+
+            const recommendedDiv = card.querySelector('.absolute');
+            const button = card.querySelector('a');
+
+            if (isRecommended) {
+                card.classList.add('border-2', 'border-blue-600', 'shadow-2xl');
+                card.classList.remove('border');
+                button.classList.add('bg-blue-600', 'text-white', 'hover:bg-blue-700');
+                button.classList.remove('bg-blue-50', 'text-blue-700', 'hover:bg-blue-100');
+                if (recommendedDiv) recommendedDiv.style.display = 'block';
+            } else {
+                card.classList.remove('border-2', 'border-blue-600', 'shadow-2xl');
+                card.classList.add('border');
+                button.classList.remove('bg-blue-600', 'text-white', 'hover:bg-blue-700');
+                button.classList.add('bg-blue-50', 'text-blue-700', 'hover:bg-blue-100');
+                if (recommendedDiv) recommendedDiv.style.display = 'none';
+            }
+        }
+
+        // --- Premium Calculator ---
         const b2cToggle = document.getElementById('b2cToggle');
         const b2bToggle = document.getElementById('b2bToggle');
         const premiumTitle = document.getElementById('premiumTitle');
-        const salaryInput = document.getElementById('salary');
-        const payoutInput = document.getElementById('payout');
+        const salaryInput = document.getElementById('calc-salary');
+        const payoutInput = document.getElementById('calc-payout');
         const payoutValue = document.getElementById('payoutValue');
         const durationContainer = document.getElementById('duration');
         const premiumResult = document.getElementById('premiumResult');
-        const annualPremium = document.getElementById('annualPremium');
         
         let currentMode = 'b2c';
-
-        const b2cRates = { 3: 0.3333, 6: 0.6667, 9: 1.0, 12: 1.3333 };
-        const b2bRates = { 3: 0.2333, 6: 0.4667, 9: 0.7, 12: 0.9333 };
+        const b2cRates = { 3: 0.013, 4: 0.0125, 6: 0.012, 9: 0.011 };
+        const b2bRates = { 3: 0.009, 4: 0.0085, 6: 0.008, 9: 0.0075 };
 
         function calculatePremium() {
             const salary = parseFloat(salaryInput.value) || 0;
@@ -463,7 +941,6 @@
             const duration = document.querySelector('input[name="duration"]:checked').value;
             
             const baseRateFactors = (currentMode === 'b2c') ? b2cRates : b2bRates;
-
             const maxPayout = Math.floor(salary * 0.8 / 1000) * 1000;
             payoutInput.max = maxPayout;
 
@@ -474,11 +951,9 @@
             
             payoutValue.textContent = payout.toLocaleString('en-IN');
             const rate = baseRateFactors[duration];
-            const annualPremiumValue = Math.round(payout * rate);
-            const monthlyPremiumValue = Math.round(annualPremiumValue / 12);
+            const monthlyPremiumValue = Math.round(payout * rate * duration); 
 
             premiumResult.textContent = `₹${monthlyPremiumValue.toLocaleString('en-IN')}`;
-            annualPremium.textContent = `${annualPremiumValue.toLocaleString('en-IN')}`;
         }
 
         function setMode(mode) {
@@ -501,15 +976,43 @@
 
         b2cToggle.addEventListener('click', () => setMode('b2c'));
         b2bToggle.addEventListener('click', () => setMode('b2b'));
-
         salaryInput.addEventListener('input', calculatePremium);
         payoutInput.addEventListener('input', calculatePremium);
         durationContainer.addEventListener('change', calculatePremium);
 
+        // --- FAQ Toggle Function ---
+        function toggleFAQ(questionElement) {
+            const answerElement = questionElement.nextElementSibling;
+            const chevronElement = questionElement.querySelector('.faq-chevron');
+            
+            if (answerElement.classList.contains('expanded')) {
+                answerElement.classList.remove('expanded');
+                chevronElement.classList.remove('rotated');
+            } else {
+                answerElement.classList.add('expanded');
+                chevronElement.classList.add('rotated');
+            }
+        }
+
+        // --- Initial Load ---
         document.addEventListener('DOMContentLoaded', () => {
             handleRouteChange();
             calculatePremium();
+
+            // Auto-select signup tab based on URL param type=b2c|b2b
+            const hash = window.location.hash;
+            if (hash.startsWith('#signup')) {
+                const query = hash.split('?')[1] || '';
+                const params = new URLSearchParams(query);
+                const type = params.get('type');
+                if (type === 'b2b') {
+                    signupB2BToggle.click();
+                } else {
+                    signupB2CToggle.click();
+                }
+            }
         });
     </script>
 </body>
 </html>
+
