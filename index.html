@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Groups - Your Financial Safety Net</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .calculator-toggle {
+            transition: all 0.2s ease-in-out;
+        }
+        /* Hide all pages by default */
+        .page {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" id="homeLink" class="text-2xl font-bold text-gray-900 cursor-pointer">Cover Insurances</a>
+            <div id="auth-links" class="flex items-center space-x-4">
+                 <a href="#login" id="loginLink" class="text-gray-600 hover:text-blue-600 font-medium">Login</a>
+                 <a href="#signup" id="signupLink" class="cta-button bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700">
+                    Sign Up
+                </a>
+            </div>
+            <div id="user-menu" class="hidden items-center space-x-4">
+                <span id="user-greeting" class="font-medium text-gray-700"></span>
+                <button id="logoutButton" class="text-gray-600 hover:text-blue-600 font-medium">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Landing Page Content -->
+    <div id="landingPage" class="page">
+        <main class="pt-20">
+            <section class="hero-gradient py-20 sm:py-32">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
+                        Your Financial Safety Net for<br>Job Uncertainty.
+                    </h2>
+                    <p class="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
+                        Job market volatility is a reality. Face your next professional move with confidence, not fear. We provide a private, personalized income cushion to empower you during periods of unemployment.
+                    </p>
+                    <div class="mt-10">
+                        <a href="#calculator" class="cta-button bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700">
+                            Calculate Your Safety Net
+                        </a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- How It Works Section -->
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h3 class="text-3xl font-bold text-gray-900">Simple, Private, and Powerful</h3>
+                        <p class="text-gray-600 mt-2">Get protected in three easy steps.</p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-10 text-center">
+                        <div class="p-8 bg-gray-100 rounded-xl">
+                            <div class="bg-blue-200 text-blue-700 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 16v-2m0-8v-2m0 16V4m6 6h2m-16 0h2m14 0h2M4 12H2m18 0h-2m-2-6l1.414-1.414M5.414 5.414L4 4m14.142 14.142L18.414 18.414M5.414 18.414L4 20m16-8a8 8 0 11-16 0 8 8 0 0116 0z" /></svg>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">1. Customize Your Plan</h4>
+                            <p class="text-gray-600">Choose the monthly payout and coverage duration that fits your life. One fair price for all individuals.</p>
+                        </div>
+                        <div class="p-8 bg-gray-100 rounded-xl">
+                            <div class="bg-blue-200 text-blue-700 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">2. Stay Protected</h4>
+                            <p class="text-gray-600">Our 2-year waiting period ensures a stable and secure community fund, ready to support you when you need it most.</p>
+                        </div>
+                        <div class="p-8 bg-gray-100 rounded-xl">
+                            <div class="bg-blue-200 text-blue-700 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">3. Receive Support</h4>
+                            <p class="text-gray-600">After a 30-day waiting period, receive your chosen monthly payout for the full duration of your plan, giving you breathing room to find the right next role.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="calculator" class="py-20 bg-gray-50">
+                <div class="container mx-auto px-6">
+                    <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl max-w-4xl mx-auto">
+                        <div class="text-center mb-10">
+                            <h3 class="text-3xl font-bold text-gray-900">Estimate Your Premium</h3>
+                            <p class="text-gray-600 mt-2">See how affordable peace of mind can be. Select a plan type and adjust the sliders.</p>
+                        </div>
+                        <div class="mb-8 p-1 bg-gray-200 rounded-lg flex justify-center max-w-sm mx-auto">
+                            <button id="b2cToggle" class="calculator-toggle w-1/2 py-2 px-4 rounded-md bg-white text-blue-600 font-semibold shadow">For Individuals</button>
+                            <button id="b2bToggle" class="calculator-toggle w-1/2 py-2 px-4 rounded-md text-gray-600 font-semibold">For Businesses</button>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div class="space-y-6">
+                                <div>
+                                    <label for="salary" class="block font-medium text-gray-700">Your Monthly In-Hand Salary (₹)</label>
+                                    <input type="number" id="salary" min="30000" max="2000000" step="10000" value="150000" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label for="payout" class="block font-medium text-gray-700">Desired Monthly Payout (up to 80%)</label>
+                                    <input type="range" id="payout" min="10000" max="1000000" step="10000" value="100000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                                    <div class="text-right font-semibold text-gray-600 mt-1">₹<span id="payoutValue">1,00,000</span></div>
+                                </div>
+                                <div>
+                                    <label class="block font-medium text-gray-700">Coverage Duration</label>
+                                    <div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-3" id="duration">
+                                        <div><input type="radio" name="duration" value="3" id="d3" class="sr-only peer"><label for="d3" class="block text-center cursor-pointer rounded-lg border p-3 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600">3 Mths</label></div>
+                                        <div><input type="radio" name="duration" value="6" id="d6" class="sr-only peer" checked><label for="d6" class="block text-center cursor-pointer rounded-lg border p-3 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600">6 Mths</label></div>
+                                        <div><input type="radio" name="duration" value="9" id="d9" class="sr-only peer"><label for="d9" class="block text-center cursor-pointer rounded-lg border p-3 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600">9 Mths</label></div>
+                                        <div><input type="radio" name="duration" value="12" id="d12" class="sr-only peer"><label for="d12" class="block text-center cursor-pointer rounded-lg border p-3 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600">12 Mths</label></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-blue-50 p-8 rounded-xl text-center">
+                                <p id="premiumTitle" class="text-gray-600 font-medium">Your Estimated Premium</p>
+                                <div class="my-4">
+                                    <span class="text-5xl font-bold text-gray-900" id="premiumResult">₹5,556</span>
+                                    <span class="text-gray-600">/ month</span>
+                                </div>
+                                <p class="text-sm text-gray-500">(billed annually at ₹<span id="annualPremium">66,667</span>)</p>
+                                <a href="#signup" class="cta-button mt-6 w-full block bg-blue-600 text-white font-bold py-3 rounded-lg text-lg hover:bg-blue-700">
+                                    Get Started
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </section>
+
+            <!-- Grow With Us Section -->
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-6 max-w-4xl text-center">
+                    <h3 class="text-3xl font-bold text-gray-900">Grow With Us & Save</h3>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Our promise is to build a stable, secure community. As our community grows and becomes more diversified, our risk goes down. We'll share that success with you by lowering your renewal premiums.</p>
+                    <div class="mt-12 grid md:grid-cols-2 gap-8 text-left">
+                        <div class="bg-gray-100 p-8 rounded-xl">
+                            <h4 class="text-xl font-semibold text-blue-600">Milestone 1: Scale</h4>
+                            <p class="mt-2 text-gray-600">When our community reaches 10,000 members, our operational costs per person decrease. We'll pass those savings on to you.</p>
+                            <p class="mt-4 text-2xl font-bold text-gray-900">5% Renewal Discount</p>
+                        </div>
+                        <div class="bg-gray-100 p-8 rounded-xl">
+                            <h4 class="text-xl font-semibold text-blue-600">Milestone 2: Diversification</h4>
+                            <p class="mt-2 text-gray-600">When our B2B channel helps us achieve true industry diversification, our entire portfolio becomes safer. We'll share that stability with you.</p>
+                            <p class="mt-4 text-2xl font-bold text-gray-900">Additional 5% Discount</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="py-20 bg-gray-50">
+                <div class="container mx-auto px-6 max-w-4xl">
+                    <div class="text-center mb-12">
+                        <h3 class="text-3xl font-bold text-gray-900">Frequently Asked Questions</h3>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h4 class="font-semibold text-lg">What exactly is this?</h4>
+                            <p class="text-gray-600 mt-2">It's a private financial product designed to provide you with a fixed monthly income if you experience an involuntary job loss. Think of it as a personal income safety net, completely independent of any employer-provided severance.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h4 class="font-semibold text-lg">Who is this for?</h4>
+                            <p class="text-gray-600 mt-2">This is for any salaried professional in India who wants to protect their income and lifestyle from the uncertainty of the job market. It's particularly valuable for those in dynamic industries like tech, startups, and services.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h4 class="font-semibold text-lg">How does the 2-year waiting period work?</h4>
+                            <p class="text-gray-600 mt-2">To ensure the long-term stability of the community fund, you must be a subscriber for a minimum of two full years before you are eligible to make a claim. This prevents immediate claims and builds a strong, sustainable capital reserve to protect all members.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h4 class="font-semibold text-lg">How are claims verified?</h4>
+                            <p class="text-gray-600 mt-2">Claims are verified digitally and securely. We require an official termination letter from your previous employer and use public records like ITR and EPFO to confirm your employment status. This ensures a fair and transparent process for everyone.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Login Page -->
+    <div id="loginPage" class="page pt-32 min-h-screen bg-gray-50 flex flex-col items-center">
+        <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
+            <h2 class="text-3xl font-bold text-center text-gray-900">Welcome Back</h2>
+            <div class="mt-6">
+                <form id="loginForm" class="space-y-6">
+                     <div>
+                        <label for="loginEmail" class="block text-sm font-medium text-gray-700">Email address</label>
+                        <input id="loginEmail" name="email" type="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="loginPassword" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input id="loginPassword" name="password" type="password" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <a href="#forgot-password" id="forgotPasswordLink" class="text-sm text-blue-600 hover:text-blue-500">Forgot your password?</a>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full cta-button bg-blue-600 text-white font-bold py-3 rounded-lg text-lg hover:bg-blue-700">Log In</button>
+                    </div>
+                </form>
+                <p class="mt-6 text-center text-sm text-gray-600">
+                    Don't have an account? <a href="#signup" id="loginToSignupLink" class="font-medium text-blue-600 hover:text-blue-500">Sign up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Page -->
+    <div id="signupPage" class="page pt-32 min-h-screen bg-gray-50 flex flex-col items-center">
+        <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
+            <h2 class="text-3xl font-bold text-center text-gray-900">Create Your Account</h2>
+            <div class="mt-6 mb-6 p-1 bg-gray-200 rounded-lg flex justify-center max-w-sm mx-auto">
+                <button id="signupB2CToggle" class="calculator-toggle w-1/2 py-2 px-4 rounded-md bg-white text-blue-600 font-semibold shadow">Individual</button>
+                <button id="signupB2BToggle" class="calculator-toggle w-1/2 py-2 px-4 rounded-md text-gray-600 font-semibold">Business</button>
+            </div>
+            <form id="signupForm" class="space-y-4">
+                <div id="b2c-fields">
+                    <div>
+                        <label for="signupName" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input id="signupName" name="name" type="text" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                </div>
+                <div id="b2b-fields" class="hidden space-y-4">
+                    <div>
+                        <label for="signupB2BName" class="block text-sm font-medium text-gray-700">Your Full Name</label>
+                        <input id="signupB2BName" name="b2b_name" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                     <div>
+                        <label for="signupCompanyName" class="block text-sm font-medium text-gray-700">Company Name</label>
+                        <input id="signupCompanyName" name="company_name" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                </div>
+                <div>
+                    <label for="signupEmail" class="block text-sm font-medium text-gray-700">Email address</label>
+                    <input id="signupEmail" name="email" type="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="signupPassword" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input id="signupPassword" name="password" type="password" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <button type="submit" class="w-full cta-button bg-blue-600 text-white font-bold py-3 mt-4 rounded-lg text-lg hover:bg-blue-700">Create Account</button>
+                </div>
+            </form>
+            <p class="mt-6 text-center text-sm text-gray-600">
+                Already have an account? <a href="#login" id="signupToLoginLink" class="font-medium text-blue-600 hover:text-blue-500">Log in</a>
+            </p>
+        </div>
+    </div>
+    
+    <!-- Forgot Password Page -->
+    <div id="forgotPasswordPage" class="page pt-32 min-h-screen bg-gray-50 flex flex-col items-center">
+         <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
+            <h2 class="text-3xl font-bold text-center text-gray-900">Reset Password</h2>
+             <p class="text-center text-gray-600 mt-2">Enter your email and we'll send you a link to reset your password.</p>
+            <form id="forgotPasswordForm" class="mt-6 space-y-6">
+                 <div>
+                    <label for="forgotEmail" class="block text-sm font-medium text-gray-700">Email address</label>
+                    <input id="forgotEmail" name="email" type="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <button type="submit" class="w-full cta-button bg-blue-600 text-white font-bold py-3 rounded-lg text-lg hover:bg-blue-700">Send Reset Link</button>
+                </div>
+            </form>
+             <p class="mt-6 text-center text-sm text-gray-600">
+                Remembered your password? <a href="#login" id="forgotToLoginLink" class="font-medium text-blue-600 hover:text-blue-500">Log in</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboardPage" class="page pt-24 container mx-auto px-6">
+        <div id="b2cDashboard" class="hidden">
+            <h2 class="text-3xl font-bold text-gray-900">My Policy Dashboard</h2>
+            <div class="mt-8 bg-white p-8 rounded-xl shadow-lg">
+                <h3 class="text-xl font-semibold">Individual Plan Details</h3>
+                <p class="mt-4 text-gray-600">Status: <span class="font-bold text-green-600">Active</span></p>
+                <p class="mt-2 text-gray-600">Coverage: ₹50,000 / month for 6 months</p>
+                <p class="mt-2 text-gray-600">Renewal Date: 31 Aug, 2026</p>
+                <button class="cta-button mt-6 bg-blue-100 text-blue-700 font-semibold px-5 py-2 rounded-lg hover:bg-blue-200">Manage Policy</button>
+            </div>
+        </div>
+        <div id="b2bDashboard" class="hidden">
+            <h2 class="text-3xl font-bold text-gray-900">Company Dashboard</h2>
+            <div class="mt-8 bg-white p-8 rounded-xl shadow-lg">
+                <h3 class="text-xl font-semibold">Acme Corporation - Group Plan</h3>
+                <p class="mt-4 text-gray-600">Status: <span class="font-bold text-green-600">Active</span></p>
+                <p class="mt-2 text-gray-600">Covered Employees: 300</p>
+                <p class="mt-2 text-gray-600">Next Billing Date: 01 Oct, 2025</p>
+                <button class="cta-button mt-6 bg-blue-100 text-blue-700 font-semibold px-5 py-2 rounded-lg hover:bg-blue-200">Manage Employees</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer for all pages -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Das Group Companies Private Limited. All rights reserved.</p>
+            <p class="text-sm text-gray-400 mt-2">This is a prototype for illustrative purposes. Not a real financial product.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Page Router & State Management ---
+        const pages = document.querySelectorAll('.page');
+        const homeLink = document.getElementById('homeLink');
+        const loginLink = document.getElementById('loginLink');
+        const signupLink = document.getElementById('signupLink');
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+        const loginToSignupLink = document.getElementById('loginToSignupLink');
+        const signupToLoginLink = document.getElementById('signupToLoginLink');
+        const forgotToLoginLink = document.getElementById('forgotToLoginLink');
+        const authLinks = document.getElementById('auth-links');
+        const userMenu = document.getElementById('user-menu');
+        const userGreeting = document.getElementById('user-greeting');
+        const logoutButton = document.getElementById('logoutButton');
+
+        let loggedInUser = null; 
+
+        function showPage(pageId) {
+            pages.forEach(page => {
+                page.style.display = (page.id === pageId) ? 'block' : 'none';
+            });
+            window.scrollTo(0, 0);
+        }
+
+        function handleRouteChange() {
+            const hash = window.location.hash.substring(1);
+            if (loggedInUser) {
+                showPage('dashboardPage');
+                if (loggedInUser.type === 'b2c') {
+                    document.getElementById('b2cDashboard').style.display = 'block';
+                    document.getElementById('b2bDashboard').style.display = 'none';
+                } else {
+                    document.getElementById('b2bDashboard').style.display = 'block';
+                    document.getElementById('b2cDashboard').style.display = 'none';
+                }
+            } else {
+                 switch (hash) {
+                    case 'login':
+                        showPage('loginPage');
+                        break;
+                    case 'signup':
+                        showPage('signupPage');
+                        break;
+                    case 'forgot-password':
+                        showPage('forgotPasswordPage');
+                        break;
+                    default:
+                        showPage('landingPage');
+                }
+            }
+            updateHeader();
+        }
+        
+        function updateHeader() {
+            if (loggedInUser) {
+                authLinks.style.display = 'none';
+                userMenu.style.display = 'flex';
+                userGreeting.textContent = `Hi, ${loggedInUser.name}`;
+            } else {
+                authLinks.style.display = 'flex';
+                userMenu.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('hashchange', handleRouteChange);
+        homeLink.addEventListener('click', (e) => { e.preventDefault(); window.location.hash = ''; handleRouteChange(); });
+        loginLink.addEventListener('click', () => { window.location.hash = 'login'; });
+        signupLink.addEventListener('click', () => { window.location.hash = 'signup'; });
+        forgotPasswordLink.addEventListener('click', () => { window.location.hash = 'forgot-password'; });
+        loginToSignupLink.addEventListener('click', () => { window.location.hash = 'signup'; });
+        signupToLoginLink.addEventListener('click', () => { window.location.hash = 'login'; });
+        forgotToLoginLink.addEventListener('click', () => { window.location.hash = 'login'; });
+
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            loggedInUser = { type: 'b2c', name: 'Kirandas' };
+            window.location.hash = 'dashboard';
+            handleRouteChange();
+        });
+
+        const signupForm = document.getElementById('signupForm');
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const type = document.getElementById('signupB2CToggle').classList.contains('bg-white') ? 'b2c' : 'b2b';
+            const name = (type === 'b2c') ? e.target.name.value : e.target.b2b_name.value;
+            loggedInUser = { type, name };
+            window.location.hash = 'dashboard';
+            handleRouteChange();
+        });
+        
+        logoutButton.addEventListener('click', () => {
+            loggedInUser = null;
+            window.location.hash = '';
+            handleRouteChange();
+        });
+
+        const signupB2CToggle = document.getElementById('signupB2CToggle');
+        const signupB2BToggle = document.getElementById('signupB2BToggle');
+        const b2cFields = document.getElementById('b2c-fields');
+        const b2bFields = document.getElementById('b2b-fields');
+        
+        signupB2CToggle.addEventListener('click', () => {
+            signupB2CToggle.classList.add('bg-white', 'text-blue-600', 'shadow');
+            signupB2CToggle.classList.remove('text-gray-600');
+            signupB2BToggle.classList.remove('bg-white', 'text-blue-600', 'shadow');
+            signupB2BToggle.classList.add('text-gray-600');
+            b2cFields.style.display = 'block';
+            b2bFields.style.display = 'none';
+        });
+        signupB2BToggle.addEventListener('click', () => {
+            signupB2BToggle.classList.add('bg-white', 'text-blue-600', 'shadow');
+            signupB2BToggle.classList.remove('text-gray-600');
+            signupB2CToggle.classList.remove('bg-white', 'text-blue-600', 'shadow');
+            signupB2CToggle.classList.add('text-gray-600');
+            b2bFields.style.display = 'block';
+            b2cFields.style.display = 'none';
+        });
+
+        const b2cToggle = document.getElementById('b2cToggle');
+        const b2bToggle = document.getElementById('b2bToggle');
+        const premiumTitle = document.getElementById('premiumTitle');
+        const salaryInput = document.getElementById('salary');
+        const payoutInput = document.getElementById('payout');
+        const payoutValue = document.getElementById('payoutValue');
+        const durationContainer = document.getElementById('duration');
+        const premiumResult = document.getElementById('premiumResult');
+        const annualPremium = document.getElementById('annualPremium');
+        
+        let currentMode = 'b2c';
+
+        const b2cRates = { 3: 0.3333, 6: 0.6667, 9: 1.0, 12: 1.3333 };
+        const b2bRates = { 3: 0.2333, 6: 0.4667, 9: 0.7, 12: 0.9333 };
+
+        function calculatePremium() {
+            const salary = parseFloat(salaryInput.value) || 0;
+            let payout = parseFloat(payoutInput.value) || 0;
+            const duration = document.querySelector('input[name="duration"]:checked').value;
+            
+            const baseRateFactors = (currentMode === 'b2c') ? b2cRates : b2bRates;
+
+            const maxPayout = Math.floor(salary * 0.8 / 1000) * 1000;
+            payoutInput.max = maxPayout;
+
+            if (payout > maxPayout) {
+                payout = maxPayout;
+                payoutInput.value = maxPayout;
+            }
+            
+            payoutValue.textContent = payout.toLocaleString('en-IN');
+            const rate = baseRateFactors[duration];
+            const annualPremiumValue = Math.round(payout * rate);
+            const monthlyPremiumValue = Math.round(annualPremiumValue / 12);
+
+            premiumResult.textContent = `₹${monthlyPremiumValue.toLocaleString('en-IN')}`;
+            annualPremium.textContent = `${annualPremiumValue.toLocaleString('en-IN')}`;
+        }
+
+        function setMode(mode) {
+            currentMode = mode;
+            if (mode === 'b2c') {
+                b2cToggle.classList.add('bg-white', 'text-blue-600', 'shadow');
+                b2cToggle.classList.remove('text-gray-600');
+                b2bToggle.classList.remove('bg-white', 'text-blue-600', 'shadow');
+                b2bToggle.classList.add('text-gray-600');
+                premiumTitle.textContent = 'Your Estimated Premium';
+            } else { 
+                b2bToggle.classList.add('bg-white', 'text-blue-600', 'shadow');
+                b2bToggle.classList.remove('text-gray-600');
+                b2cToggle.classList.remove('bg-white', 'text-blue-600', 'shadow');
+                b2cToggle.classList.add('text-gray-600');
+                premiumTitle.textContent = 'Estimated Premium Per Employee';
+            }
+            calculatePremium();
+        }
+
+        b2cToggle.addEventListener('click', () => setMode('b2c'));
+        b2bToggle.addEventListener('click', () => setMode('b2b'));
+
+        salaryInput.addEventListener('input', calculatePremium);
+        payoutInput.addEventListener('input', calculatePremium);
+        durationContainer.addEventListener('change', calculatePremium);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            handleRouteChange();
+            calculatePremium();
+        });
+    </script>
+</body>
+</html>
