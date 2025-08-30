@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerShield - UI Mockup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .screen {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        [x-cloak] { display: none !important; }
+        /* Custom slider styles */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #2563eb;
+            cursor: pointer;
+            margin-top: -6px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+        }
+
+        input[type=range]::-moz-range-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #2563eb;
+            cursor: pointer;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #d1d5db;
+            border-radius: 5px;
+        }
+
+         input[type=range]::-moz-range-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #d1d5db;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Main Container -->
+    <div id="app-container" class="min-h-screen">
+
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-50">
+            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="#" class="flex items-center space-x-2" onclick="event.preventDefault(); navigateTo('homepage')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <h1 class="text-xl font-bold text-gray-900">CareerShield</h1>
+                </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-blue-600" onclick="event.preventDefault(); navigateTo('homepage')">For Individuals</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600" onclick="event.preventDefault(); navigateTo('business-homepage')">For Businesses</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600" onclick="event.preventDefault(); navigateTo('faq')">FAQs</a>
+                </div>
+                <!-- Logged Out State -->
+                <div id="logged-out-header" class="flex items-center space-x-4">
+                    <button class="text-gray-600 hover:text-blue-600" onclick="navigateTo('login')">Log In</button>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 shadow" onclick="navigateTo('homepage')">Get Quote</button>
+                </div>
+                <!-- Logged In State -->
+                <div id="logged-in-header" class="hidden items-center space-x-4">
+                    <button class="font-semibold text-gray-600 hover:text-blue-600" onclick="navigateTo('dashboard')">My Dashboard</button>
+                    <button class="text-gray-600 hover:text-blue-600" onclick="logout()">Log Out</button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- SCREEN 1: Homepage / Discovery & Quoting -->
+        <main id="homepage" class="screen active">
+            <div class="container mx-auto px-6 py-16 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900">Career security for a changing world.</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Get peace of mind with layoff insurance that protects your income when you need it most.</p>
+            </div>
+            <div class="container mx-auto px-6 pb-20 flex justify-center">
+                <div class="w-full max-w-2xl bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                    <h3 class="text-2xl font-semibold mb-6 text-center">Get Your Free Quote in Seconds</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="country" class="block text-sm font-medium text-gray-700 mb-1">City</label>
+                            <select id="country" class="w-full px-4 py-3 rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                                <option>Bengaluru</option>
+                                <option>Mumbai</option>
+                                <option>Delhi</option>
+                                <option>Hyderabad</option>
+                                <option>Pune</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="salary" class="block text-sm font-medium text-gray-700 mb-1">Monthly Gross Salary (₹)</label>
+                            <input type="number" id="salary" placeholder="e.g., 75000" class="w-full px-4 py-3 rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                             <label for="industry" class="block text-sm font-medium text-gray-700 mb-1">Industry / Job Role</label>
+                            <input type="text" id="industry" placeholder="e.g., Software Engineer" class="w-full px-4 py-3 rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="coverage" class="block text-sm font-medium text-gray-700 mb-1">Desired Coverage</label>
+                            <select id="coverage" class="w-full px-4 py-3 rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                                <option>60% of salary for 3 months</option>
+                                <option>50% of salary for 4 months</option>
+                                <option>70% of salary for 2 months</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <button class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 shadow-md transition-transform transform hover:scale-105" onclick="navigateTo('plans')">See My Plans</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- SCREEN 2: Plans & Onboarding -->
+        <main id="plans" class="screen">
+            <div class="container mx-auto px-6 py-16">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-2">Your Tailored Policy Options</h2>
+                <p class="text-center text-gray-600 mb-10">Based on your details, here are the best plans for you.</p>
+                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <!-- Plan Card 1 -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex flex-col">
+                        <h3 class="text-xl font-semibold text-blue-600">Standard Plan</h3>
+                        <p class="text-gray-500 mt-1">Great starting point</p>
+                        <p class="text-4xl font-bold my-4">₹550<span class="text-lg font-medium text-gray-500">/month</span></p>
+                        <ul class="space-y-3 text-gray-700 mb-6 flex-grow">
+                           <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Covers 60% of salary</li>
+                           <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>3 months of payout</li>
+                           <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Email support</li>
+                        </ul>
+                        <button class="w-full bg-gray-200 text-gray-800 font-bold py-3 rounded-lg hover:bg-gray-300" onclick="selectPlanAndNavigate('onboarding')">Choose Plan</button>
+                    </div>
+                    <!-- Plan Card 2 (Recommended) -->
+                    <div class="bg-white p-6 rounded-xl shadow-2xl border-2 border-blue-600 relative flex flex-col">
+                        <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">RECOMMENDED</div>
+                        <h3 class="text-xl font-semibold text-blue-600">Plus Plan</h3>
+                        <p class="text-gray-500 mt-1">Most popular choice</p>
+                        <p class="text-4xl font-bold my-4">₹750<span class="text-lg font-medium text-gray-500">/month</span></p>
+                         <ul class="space-y-3 text-gray-700 mb-6 flex-grow">
+                           <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Covers 70% of salary</li>
+                           <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>4 months of payout</li>
+                           <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Priority support</li>
+                           <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Career coaching session</li>
+                        </ul>
+                        <button class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700" onclick="selectPlanAndNavigate('onboarding')">Choose Plan</button>
+                    </div>
+                    <!-- Plan Card 3 -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex flex-col">
+                        <h3 class="text-xl font-semibold text-blue-600">Premium Plan</h3>
+                        <p class="text-gray-500 mt-1">Maximum protection</p>
+                        <p class="text-4xl font-bold my-4">₹990<span class="text-lg font-medium text-gray-500">/month</span></p>
+                        <ul class="space-y-3 text-gray-700 mb-6 flex-grow">
+                           <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Covers 75% of salary</li>
+                           <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>6 months of payout</li>
+                           <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Dedicated support agent</li>
+                        </ul>
+                        <button class="w-full bg-gray-200 text-gray-800 font-bold py-3 rounded-lg hover:bg-gray-300" onclick="selectPlanAndNavigate('onboarding')">Choose Plan</button>
+                    </div>
+                </div>
+                 <div class="text-center mt-12">
+                    <a href="#" class="text-blue-600 font-semibold hover:underline" onclick="event.preventDefault(); navigateTo('custom-plan')">
+                        Want more control? Build Your Own Custom Plan &rarr;
+                    </a>
+                </div>
+            </div>
+        </main>
+        
+        <!-- SCREEN 3: Custom Plan Builder -->
+        <main id="custom-plan" class="screen">
+            <div class="container mx-auto px-6 py-16">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-2">Build Your Custom Plan</h2>
+                <p class="text-center text-gray-600 mb-10">Adjust the sliders to create a policy that fits your exact needs.</p>
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- Customization Controls -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label for="custom-salary" class="font-semibold text-gray-700">Monthly Gross Salary</label>
+                                <span class="font-bold text-blue-600 text-lg">₹<span id="custom-salary-value">75000</span></span>
+                            </div>
+                            <input type="range" id="custom-salary" min="25000" max="200000" step="5000" value="75000" class="w-full">
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label for="custom-coverage" class="font-semibold text-gray-700">Coverage (% of Salary)</label>
+                                <span class="font-bold text-blue-600 text-lg"><span id="custom-coverage-value">60</span>%</span>
+                            </div>
+                            <input type="range" id="custom-coverage" min="40" max="80" step="5" value="60" class="w-full">
+                        </div>
+                        <div>
+                           <div class="flex justify-between items-center mb-2">
+                                <label for="custom-duration" class="font-semibold text-gray-700">Payout Duration</label>
+                                <span class="font-bold text-blue-600 text-lg"><span id="custom-duration-value">3</span> Months</span>
+                            </div>
+                            <input type="range" id="custom-duration" min="2" max="6" step="1" value="3" class="w-full">
+                        </div>
+                         <div>
+                           <label class="font-semibold text-gray-700 mb-3 block">Cooling-Off Period</label>
+                           <div class="grid grid-cols-3 gap-2">
+                                <div>
+                                    <input type="radio" name="cooling-period" id="cool-30" value="30" class="sr-only peer" checked>
+                                    <label for="cool-30" class="block text-center p-3 rounded-lg border-2 border-gray-200 cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600">30 Days</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="cooling-period" id="cool-60" value="60" class="sr-only peer">
+                                    <label for="cool-60" class="block text-center p-3 rounded-lg border-2 border-gray-200 cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600">60 Days</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="cooling-period" id="cool-90" value="90" class="sr-only peer">
+                                    <label for="cool-90" class="block text-center p-3 rounded-lg border-2 border-gray-200 cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600">90 Days</label>
+                                </div>
+                           </div>
+                           <p class="text-xs text-gray-500 mt-2">A longer cooling period before your policy is active significantly reduces your premium.</p>
+                        </div>
+                    </div>
+                    <!-- Pricing Display -->
+                    <div class="bg-white p-8 rounded-xl shadow-2xl border-2 border-blue-600 flex flex-col justify-center items-center text-center">
+                         <h3 class="text-xl font-semibold text-gray-800">Your Custom Plan Premium</h3>
+                         <p class="text-5xl font-bold my-4 text-blue-600">₹<span id="custom-premium-value">620</span></p>
+                         <p class="text-lg font-medium text-gray-500 -mt-2 mb-6">per month</p>
+                         <button class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 shadow-md text-lg" onclick="selectPlanAndNavigate('onboarding')">Choose This Plan</button>
+                         <p class="text-xs text-gray-500 mt-4 max-w-xs">This price is an estimate. Final premium will be confirmed after verification.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- SCREEN 4: Onboarding & KYC -->
+        <main id="onboarding" class="screen">
+            <div class="container mx-auto px-6 py-16 max-w-md">
+                 <h2 class="text-3xl font-bold text-center text-gray-900 mb-2">Create Your Account</h2>
+                 <p class="text-center text-gray-600 mb-8">Just a few more steps to secure your policy.</p>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                    <div id="signup-form">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input type="email" class="w-full px-4 py-3 rounded-lg border-gray-300 mb-4" placeholder="you@example.com">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input type="password" class="w-full px-4 py-3 rounded-lg border-gray-300 mb-6" placeholder="••••••••">
+                        <button class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700" onclick="showVerification()">Create Account</button>
+                    </div>
+                     <div id="verification-steps" class="hidden">
+                        <h3 class="text-xl font-semibold mb-4 text-center">Verification Required</h3>
+                        <div class="space-y-4">
+                            <!-- Identity Verification -->
+                            <div id="identity-step" class="p-4 border rounded-lg flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-semibold">1. Identity Verification</h4>
+                                    <p class="text-sm text-gray-500">Upload your PAN or Aadhaar card.</p>
+                                </div>
+                                <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300" onclick="simulateVerification('identity')">Start</button>
+                            </div>
+                            <div id="identity-loading" class="hidden p-4 border rounded-lg flex items-center space-x-3">
+                                <svg class="animate-spin h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                <span>Verifying ID... Please wait.</span>
+                            </div>
+                            <div id="identity-done" class="hidden p-4 border-green-300 bg-green-50 rounded-lg flex justify-between items-center">
+                                <div class="flex items-center space-x-2">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-600"></i>
+                                    <h4 class="font-semibold text-green-800">Identity Verified</h4>
+                                </div>
+                            </div>
+
+                            <!-- Employment Verification -->
+                             <div id="employment-step" class="hidden p-4 border rounded-lg flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-semibold">2. Employment Verification</h4>
+                                    <p class="text-sm text-gray-500">Upload recent payslips.</p>
+                                </div>
+                                <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300" onclick="simulateVerification('employment')">Start</button>
+                            </div>
+                             <div id="employment-loading" class="hidden p-4 border rounded-lg flex items-center space-x-3">
+                                <svg class="animate-spin h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                <span>Verifying Employment...</span>
+                            </div>
+                            <div id="employment-done" class="hidden p-4 border-green-300 bg-green-50 rounded-lg flex justify-between items-center">
+                                 <div class="flex items-center space-x-2">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-600"></i>
+                                    <h4 class="font-semibold text-green-800">Employment Verified</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="payment-btn" class="hidden w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 mt-6" onclick="navigateTo('payment')">Proceed to Payment</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- SCREEN 5: Payment -->
+        <main id="payment" class="screen">
+            <div class="container mx-auto px-6 py-16 max-w-md">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Secure Your Policy</h2>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                    <div class="mb-6 border-b pb-4">
+                        <h3 class="text-lg font-semibold">Your Selected Plan</h3>
+                        <div class="flex justify-between items-baseline mt-2">
+                            <span class="text-gray-600">Monthly Premium</span>
+                            <span class="font-bold text-xl">₹750.00</span>
+                        </div>
+                    </div>
+                    <h4 class="font-semibold mb-4">Payment Details</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
+                            <div class="p-3 border rounded-lg flex items-center space-x-2">
+                                <i data-lucide="credit-card" class="w-5 h-5 text-gray-400"></i>
+                                <input class="w-full outline-none" placeholder="•••• •••• •••• 4242">
+                            </div>
+                        </div>
+                        <div class="flex space-x-4">
+                            <div class="w-1/2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
+                                <input class="w-full p-3 border rounded-lg" placeholder="MM / YY">
+                            </div>
+                            <div class="w-1/2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">CVC</label>
+                                <input class="w-full p-3 border rounded-lg" placeholder="•••">
+                            </div>
+                        </div>
+                    </div>
+                     <div class="mt-6 flex items-start">
+                        <input type="checkbox" id="terms" class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <label for="terms" class="ml-2 text-sm text-gray-600">I have read and agree to the <a href="#" class="text-blue-600 hover:underline">terms and conditions</a> and policy document.</label>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 mt-6" onclick="login()">Activate My Policy</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- SCREEN 6: User Dashboard -->
+        <main id="dashboard" class="screen">
+            <div class="container mx-auto px-6 py-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Welcome back, Priya!</h2>
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="lg-col-span-2">
+                        <!-- Main Status Card -->
+                        <div id="status-card-active" class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-2xl font-bold">Policy Status: Active</h3>
+                                    <p class="text-green-600 font-semibold bg-green-100 inline-block px-3 py-1 rounded-full text-sm mt-2">You are protected</p>
+                                </div>
+                                <div class="text-right">
+                                     <p class="text-gray-500">Next Premium</p>
+                                     <p class="font-bold text-lg">₹750.00 on 1st Sep 2025</p>
+                                </div>
+                            </div>
+                            <div class="mt-8 pt-6 border-t">
+                                 <h4 class="font-semibold mb-4">Your Coverage</h4>
+                                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center">
+                                     <div>
+                                         <p class="text-gray-500 text-sm">Payout Amount</p>
+                                         <p class="font-bold text-xl">₹52,500 / month</p>
+                                     </div>
+                                     <div>
+                                         <p class="text-gray-500 text-sm">Duration</p>
+                                         <p class="font-bold text-xl">4 Months</p>
+                                     </div>
+                                     <div>
+                                         <p class="text-gray-500 text-sm">Plan</p>
+                                         <p class="font-bold text-xl">Plus Plan</p>
+                                     </div>
+                                 </div>
+                            </div>
+                        </div>
+
+                         <!-- Claim Status Card -->
+                        <div id="status-card-claim" class="hidden bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                            <h3 class="text-2xl font-bold mb-4">Claim Status: Under Review</h3>
+                            <p class="text-gray-600 mb-6">We have received your claim and documents. Our team is reviewing them and we will update you within 3-5 business days.</p>
+                             <!-- Stepper -->
+                            <ol class="relative text-gray-500 border-s border-gray-200">                  
+                                <li class="mb-10 ms-6 text-blue-600 font-bold">            
+                                    <span class="absolute flex items-center justify-center w-8 h-8 bg-blue-100 rounded-full -start-4 ring-4 ring-white">
+                                        <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                    </span>
+                                    <h3 class="font-medium leading-tight">Claim Submitted</h3>
+                                    <p class="text-sm">30th Aug 2025</p>
+                                </li>
+                                <li class="mb-10 ms-6">
+                                    <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white">
+                                        <i data-lucide="file-clock" class="w-5 h-5"></i>
+                                    </span>
+                                    <h3 class="font-medium leading-tight">In Review</h3>
+                                </li>
+                                <li class="ms-6">
+                                    <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white">
+                                        <i data-lucide="wallet" class="w-5 h-5"></i>
+                                    </span>
+                                    <h3 class="font-medium leading-tight">Payouts Begin</h3>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!-- Actions Column -->
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                            <h3 class="font-bold text-lg mb-4">Actions</h3>
+                            <button class="w-full bg-red-500 text-white font-bold py-3 rounded-lg hover:bg-red-600" onclick="navigateTo('claim')">File a Claim</button>
+                            <button class="w-full mt-3 bg-gray-100 text-gray-700 font-bold py-3 rounded-lg hover:bg-gray-200">Download Policy</button>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                             <h3 class="font-bold text-lg mb-4">Payment History</h3>
+                             <ul class="space-y-3">
+                                 <li class="flex justify-between text-sm"><span>1st Aug 2025</span><span class="font-medium">₹750.00</span></li>
+                                 <li class="flex justify-between text-sm"><span>1st Jul 2025</span><span class="font-medium">₹750.00</span></li>
+                                 <li class="flex justify-between text-sm"><span>1st Jun 2025</span><span class="font-medium">₹750.00</span></li>
+                             </ul>
+                             <a href="#" class="text-blue-600 text-sm font-semibold mt-3 inline-block">View All</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- SCREEN 7: Claim Initiation Wizard -->
+        <main id="claim" class="screen">
+            <div class="container mx-auto px-6 py-16 max-w-2xl">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-2">File a Claim</h2>
+                <p class="text-center text-gray-600 mb-8">We're here to help. Please provide the following details.</p>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                    <!-- Step 1: Details -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">1. Layoff Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Last Day of Employment</label>
+                                <input type="date" class="w-full p-2 border rounded-lg">
+                            </div>
+                             <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                                <input type="text" class="w-full p-2 border rounded-lg" value="Example Corp" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Step 2: Documents -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">2. Required Documents</h3>
+                        <p class="text-sm text-gray-500 mb-4">Please upload your official termination letter and your final payslip.</p>
+                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                            <div class="space-y-1 text-center">
+                                <i data-lucide="upload-cloud" class="mx-auto h-12 w-12 text-gray-400"></i>
+                                <div class="flex text-sm text-gray-600">
+                                    <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                        <span>Upload files</span>
+                                        <input id="file-upload" name="file-upload" type="file" class="sr-only" multiple>
+                                    </label>
+                                    <p class="pl-1">or drag and drop</p>
+                                </div>
+                                <p class="text-xs text-gray-500">PNG, JPG, PDF up to 10MB</p>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Step 3: Payout Info -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">3. Confirm Payout Account</h3>
+                        <div class="p-4 bg-gray-100 rounded-lg flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <i data-lucide="landmark" class="w-6 h-6 text-gray-500"></i>
+                                <div>
+                                    <p class="font-semibold">HDFC Bank</p>
+                                    <p class="text-sm text-gray-600">Savings Account ending in •••• 1234</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-medium text-green-700">Verified</span>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 mt-8" onclick="submitClaim()">Submit My Claim</button>
+                    <button class="w-full text-center mt-4 text-gray-600 text-sm hover:underline" onclick="navigateTo('dashboard')">Cancel</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- SCREEN 8: Login -->
+        <main id="login" class="screen">
+             <div class="container mx-auto px-6 py-16 max-w-sm">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-2">Log In to Your Account</h2>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 mt-8">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <input type="email" class="w-full px-4 py-3 rounded-lg border-gray-300 mb-4" placeholder="you@example.com" value="priya@example.com">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input type="password" class="w-full px-4 py-3 rounded-lg border-gray-300 mb-6" placeholder="••••••••" value="password">
+                     <a href="#" class="text-sm text-blue-600 hover:underline block mb-6 text-right">Forgot Password?</a>
+                    <button class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700" onclick="login()">Log In</button>
+                    <p class="text-sm text-center mt-4 text-gray-600">
+                        Don't have an account? <a href="#" onclick="event.preventDefault(); navigateTo('homepage')" class="font-semibold text-blue-600 hover:underline">Sign up</a>
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <!-- SCREEN 9: For Businesses Homepage -->
+        <main id="business-homepage" class="screen">
+            <div class="bg-white">
+                <div class="container mx-auto px-6 py-20 text-center">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900">Support your team through transitions.</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Offer CareerShield as an employee benefit to enhance your offboarding process, protect your brand, and provide a soft landing for departing team members.</p>
+                    <button class="mt-8 bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 shadow-md text-lg" onclick="navigateTo('business-dashboard')">Request a Demo</button>
+                </div>
+            </div>
+            <div class="container mx-auto px-6 py-20">
+                <h3 class="text-3xl font-bold text-center mb-12">Benefits for Your Business</h3>
+                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div class="text-center p-6">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto mb-4">
+                            <i data-lucide="shield-heart" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2">Enhance Employer Brand</h4>
+                        <p class="text-gray-600">Show that you care for employees even after they leave, fostering goodwill and a positive market reputation.</p>
+                    </div>
+                    <div class="text-center p-6">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto mb-4">
+                            <i data-lucide="trending-up" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2">Improve Team Morale</h4>
+                        <p class="text-gray-600">Provide a safety net for your current workforce, reducing anxiety around organizational changes.</p>
+                    </div>
+                     <div class="text-center p-6">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto mb-4">
+                            <i data-lucide="mouse-pointer-click" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2">Streamlined Process</h4>
+                        <p class="text-gray-600">Our simple dashboard makes it easy to manage employees and handle offboarding notifications seamlessly.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- SCREEN 10: Business Dashboard -->
+        <main id="business-dashboard" class="screen">
+             <div class="container mx-auto px-6 py-12">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900">Corporate Dashboard: Acme India Pvt. Ltd.</h2>
+                    <div class="space-x-3">
+                         <button class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 flex items-center space-x-2">
+                            <i data-lucide="user-plus" class="w-5 h-5"></i>
+                            <span>Add Employees</span>
+                        </button>
+                         <button class="bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 flex items-center space-x-2">
+                            <i data-lucide="user-minus" class="w-5 h-5"></i>
+                            <span>Report Layoff</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border">
+                        <h4 class="text-gray-500 font-semibold">Employees Covered</h4>
+                        <p class="text-3xl font-bold mt-2">142</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-xl shadow-lg border">
+                        <h4 class="text-gray-500 font-semibold">Monthly Premium</h4>
+                        <p class="text-3xl font-bold mt-2">₹1,06,500</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-xl shadow-lg border">
+                        <h4 class="text-gray-500 font-semibold">Active Claims</h4>
+                        <p class="text-3xl font-bold mt-2">2</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-xl shadow-lg border">
+                        <h4 class="text-gray-500 font-semibold">Default Plan</h4>
+                        <p class="text-3xl font-bold mt-2">Plus Plan</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-lg border">
+                    <h3 class="font-bold text-xl mb-4">Covered Employee Roster</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="border-b bg-gray-50">
+                                    <th class="p-3 font-semibold">Employee Name</th>
+                                    <th class="p-3 font-semibold">Employee ID</th>
+                                    <th class="p-3 font-semibold">Policy Plan</th>
+                                    <th class="p-3 font-semibold">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="p-3">Aarav Sharma</td>
+                                    <td class="p-3">ACME-0532</td>
+                                    <td class="p-3">Plus Plan</td>
+                                    <td class="p-3"><span class="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">Active</span></td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-3">Diya Patel</td>
+                                    <td class="p-3">ACME-0781</td>
+                                    <td class="p-3">Plus Plan</td>
+                                    <td class="p-3"><span class="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">Active</span></td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-3">Rohan Mehta</td>
+                                    <td class="p-3">ACME-0219</td>
+                                    <td class="p-3">Premium Plan</td>
+                                    <td class="p-3"><span class="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">Active</span></td>
+                                </tr>
+                                 <tr class="border-b">
+                                    <td class="p-3">Isha Singh</td>
+                                    <td class="p-3">ACME-0115</td>
+                                    <td class="p-3">Plus Plan</td>
+                                    <td class="p-3"><span class="bg-yellow-100 text-yellow-700 text-xs font-semibold px-2 py-1 rounded-full">Claim Processing</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- SCREEN 11: FAQs -->
+        <main id="faq" class="screen">
+            <div class="container mx-auto px-6 py-16 max-w-3xl">
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-10">Frequently Asked Questions</h2>
+                <div class="space-y-4" x-data="{ open: 1 }">
+                    <!-- FAQ Item 1 -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border">
+                        <button @click="open = (open === 1 ? 0 : 1)" class="w-full flex justify-between items-center text-left">
+                            <h3 class="font-semibold text-lg">What is layoff insurance?</h3>
+                            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform" :class="open === 1 && 'rotate-180'"></i>
+                        </button>
+                        <div x-show="open === 1" x-cloak class="mt-4 text-gray-600">
+                            <p>Layoff insurance, also known as job loss insurance or income protection, is a policy that provides financial support if you lose your job due to a layoff or retrenchment. It pays out a percentage of your salary for a fixed period, helping you cover expenses while you search for a new job.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                     <div class="bg-white p-6 rounded-xl shadow-lg border">
+                        <button @click="open = (open === 2 ? 0 : 2)" class="w-full flex justify-between items-center text-left">
+                            <h3 class="font-semibold text-lg">Who is eligible for a CareerShield policy?</h3>
+                            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform" :class="open === 2 && 'rotate-180'"></i>
+                        </button>
+                        <div x-show="open === 2" x-cloak class="mt-4 text-gray-600">
+                            <p>Any salaried employee working full-time in a registered company in India is eligible to apply. Eligibility for specific plans may depend on your industry, salary, and job stability. We currently do not cover self-employed individuals or contract workers.</p>
+                        </div>
+                    </div>
+                     <!-- FAQ Item 3 -->
+                     <div class="bg-white p-6 rounded-xl shadow-lg border">
+                        <button @click="open = (open === 3 ? 0 : 3)" class="w-full flex justify-between items-center text-left">
+                            <h3 class="font-semibold text-lg">What documents are required to file a claim in India?</h3>
+                            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform" :class="open === 3 && 'rotate-180'"></i>
+                        </button>
+                        <div x-show="open === 3" x-cloak class="mt-4 text-gray-600">
+                            <p>To process a claim, you will typically need to provide your official termination letter from your employer, your final payslips, and a copy of your bank statement showing your last salary credit. This helps us verify the layoff and your income details swiftly.</p>
+                        </div>
+                    </div>
+                     <!-- FAQ Item 4 -->
+                     <div class="bg-white p-6 rounded-xl shadow-lg border">
+                        <button @click="open = (open === 4 ? 0 : 4)" class="w-full flex justify-between items-center text-left">
+                            <h3 class="font-semibold text-lg">Does receiving a severance package affect my claim?</h3>
+                            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform" :class="open === 4 && 'rotate-180'"></i>
+                        </button>
+                        <div x-show="open === 4" x-cloak class="mt-4 text-gray-600">
+                            <p>No, your CareerShield policy payout is independent of any severance package you may receive from your employer. Our goal is to provide an additional layer of financial security during your transition, regardless of your company's severance policy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script>
+        lucide.createIcons();
+        
+        let isLoggedIn = false;
+        const screens = document.querySelectorAll('.screen');
+        const defaultScreen = 'homepage';
+        
+        function navigateTo(screenId) {
+            screens.forEach(screen => {
+                screen.classList.remove('active');
+            });
+            const targetScreen = document.getElementById(screenId);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+            } else {
+                 document.getElementById(defaultScreen).classList.add('active');
+            }
+            window.scrollTo(0, 0);
+            updateHeader();
+            if (screenId === 'custom-plan') {
+                initializeCustomPlan();
+            }
+        }
+
+        function selectPlanAndNavigate(screenId) {
+            navigateTo(screenId);
+        }
+        
+        function showVerification() {
+            document.getElementById('signup-form').classList.add('hidden');
+            document.getElementById('verification-steps').classList.remove('hidden');
+        }
+        
+        function simulateVerification(step) {
+            const stepEl = document.getElementById(`${step}-step`);
+            const loadingEl = document.getElementById(`${step}-loading`);
+            const doneEl = document.getElementById(`${step}-done`);
+            
+            stepEl.classList.add('hidden');
+            loadingEl.classList.remove('hidden');
+            
+            setTimeout(() => {
+                loadingEl.classList.add('hidden');
+                doneEl.classList.remove('hidden');
+                
+                if (step === 'identity') {
+                    document.getElementById('employment-step').classList.remove('hidden');
+                } else if (step === 'employment') {
+                    document.getElementById('payment-btn').classList.remove('hidden');
+                }
+
+                lucide.createIcons();
+            }, 2000);
+        }
+
+        function submitClaim() {
+            navigateTo('dashboard');
+            document.getElementById('status-card-active').classList.add('hidden');
+            document.getElementById('status-card-claim').classList.remove('hidden');
+            lucide.createIcons();
+        }
+        
+        function updateHeader() {
+            const loggedInHeader = document.getElementById('logged-in-header');
+            const loggedOutHeader = document.getElementById('logged-out-header');
+            if (isLoggedIn) {
+                loggedInHeader.classList.remove('hidden');
+                loggedInHeader.classList.add('flex');
+                loggedOutHeader.classList.add('hidden');
+                loggedOutHeader.classList.remove('flex');
+            } else {
+                loggedInHeader.classList.add('hidden');
+                loggedInHeader.classList.remove('flex');
+                loggedOutHeader.classList.remove('hidden');
+                loggedOutHeader.classList.add('flex');
+            }
+        }
+
+        function login() {
+            isLoggedIn = true;
+            navigateTo('dashboard');
+        }
+
+        function logout() {
+            isLoggedIn = false;
+            // Reset claim status view on logout
+            document.getElementById('status-card-active').classList.remove('hidden');
+            document.getElementById('status-card-claim').classList.add('hidden');
+            navigateTo('homepage');
+        }
+
+        // --- Custom Plan Calculator ---
+        function calculatePremium() {
+            const salary = parseFloat(document.getElementById('custom-salary').value);
+            const coverage = parseFloat(document.getElementById('custom-coverage').value);
+            const duration = parseFloat(document.getElementById('custom-duration').value);
+            const coolingPeriod = parseFloat(document.querySelector('input[name="cooling-period"]:checked').value);
+
+            // Update display values
+            document.getElementById('custom-salary-value').textContent = salary.toLocaleString('en-IN');
+            document.getElementById('custom-coverage-value').textContent = coverage;
+            document.getElementById('custom-duration-value').textContent = duration;
+
+            // Simple pricing logic (for demonstration)
+            const riskFactor = 0.011; // Base risk
+            let coolingDiscount;
+            if (coolingPeriod === 30) coolingDiscount = 1.0;
+            else if (coolingPeriod === 60) coolingDiscount = 1.25;
+            else coolingDiscount = 1.5;
+
+            const totalPayout = salary * (coverage / 100) * duration;
+            const basePremium = (totalPayout * riskFactor) / 12;
+            const finalPremium = Math.round(basePremium / coolingDiscount);
+
+            document.getElementById('custom-premium-value').textContent = finalPremium.toLocaleString('en-IN');
+        }
+
+        function initializeCustomPlan() {
+            const sliders = ['custom-salary', 'custom-coverage', 'custom-duration'];
+            sliders.forEach(id => document.getElementById(id).addEventListener('input', calculatePremium));
+            
+            const radios = document.querySelectorAll('input[name="cooling-period"]');
+            radios.forEach(radio => radio.addEventListener('change', calculatePremium));
+
+            calculatePremium(); // Initial calculation
+        }
+
+        // Initialize
+        navigateTo(defaultScreen);
+    </script>
+</body>
+</html>
+
