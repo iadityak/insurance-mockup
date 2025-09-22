@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gatoms - Layoff Insurance Protection | Coming Soon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated background particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Background geometric shapes -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+    </div>
+    
+    <!-- Dynamic grid background -->
+    <div class="grid-background" id="grid-bg"></div>
+    
+    <!-- Main content -->
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="brand-section">
+                    <span class="logo-text">Gatoms</span>
+                    <span class="coming-soon-badge">Coming Soon</span>
+                </div>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+        
+        <main>
+            <div class="content-wrapper">
+                <!-- 3D Atomic Logo -->
+                <div class="hero-logo-container">
+                    <div class="atomic-logo-3d" id="atomic-logo">
+                        <div class="logo-scene">
+                            <!-- Central Nucleus -->
+                            <div class="nucleus-3d">
+                                <div class="nucleus-core">
+                                    <div class="nucleus-inner"></div>
+                                    <div class="nucleus-glow"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Electron Orbits -->
+                            <div class="orbit-system">
+                                <div class="electron-orbit orbit-x">
+                                    <div class="electron electron-1"></div>
+                                    <div class="electron electron-2"></div>
+                                </div>
+                                <div class="electron-orbit orbit-y">
+                                    <div class="electron electron-3"></div>
+                                </div>
+                                <div class="electron-orbit orbit-z">
+                                    <div class="electron electron-4"></div>
+                                    <div class="electron electron-5"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Energy Rings -->
+                            <div class="energy-rings">
+                                <div class="energy-ring ring-1"></div>
+                                <div class="energy-ring ring-2"></div>
+                                <div class="energy-ring ring-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <!-- Main heading -->
+                <h1 class="main-heading">
+                    <span class="heading-line">
+                        <span class="word-animate">Building</span>
+                        <span class="word-animate">Your</span>
+                        <span class="word-animate">Career</span>
+                    </span>
+                    <span class="heading-line gradient-text">
+                        <span class="word-animate">Security</span>
+                    </span>
+                </h1>
+                
+                <!-- Description -->
+                <p class="description">
+                    Secure your financial future with innovative layoff insurance protection. 
+                    Get immediate coverage when unexpected job loss happens. 
+                    Be the first to experience peace of mind.
+                </p>
+                
+                <!-- Email capture form -->
+                <div class="email-form-wrapper">
+                    <form id="email-form" class="email-form">
+                        <div class="input-group">
+                            <div class="input-container">
+                                <input 
+                                    type="email" 
+                                    id="email-input" 
+                                    class="email-input" 
+                                    placeholder="Enter your email address"
+                                    required
+                                >
+                                <div class="input-highlight"></div>
+                            </div>
+                            <button type="submit" class="submit-btn">
+                                <span class="btn-text">Notify Me</span>
+                                <div class="btn-particles"></div>
+                                <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 4V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="form-message" id="form-message"></div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p class="footer-text">© 2025 Gatoms Private Limited. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
